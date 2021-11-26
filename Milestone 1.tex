@@ -1,0 +1,68 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{CIS-530 Term Project Milestone 1: Literature Review / Data}
+\author{Yuran Liu, Andrew Zhu, Yongzhe Zhu}
+
+\begin{document}
+\maketitle
+
+\section{Literatur Review}
+Traditionally, S2ST (speech-to-speech translation) systems first convert speech to text before translating the text into a different language. These systems can have a large latency and compounding errors across their different stages. Various recent research have attempted to develop a system that can perform end-to-end speech-to-speech machine translation without using intermediate text representation. These systems are trained end-to-end directly for S2ST tasks, and therefore have the potential to achieve a higher performance than traditional systems. Here we review three recent studies (Kano et al., 2021; Jia et al., 2019; Babu et al., 2021) on direct S2ST / S2T (speech to text, a weaker version) and show that these systems can have similar or superior performance compared with traditional systems.
+\subsection{Models}
+\subsubsection{Jia et al., 2019}
+Their model consists of the following components: 1. A speech encoder; 2. A target language spectrogram decoder with an attention-based Seq2Seq model; 2. Convert target language spectrogram to time-domain waveforms with a vocoder. The speech encoder maps 80-channel log-mel source language spectrogram into hidden states; it consists of a stack of 8 bidirectional LSTM layers. The decoder predicts 1025-dim log spectrogram frames corresponding to the translated speech; it has an architecture similar to the Tacotron 2 TTS model. They used Griffin-Lim vocoder for training and development and used WaveRNN neural vocoder for evaluation.
+\subsubsection{Kano et al., 2021}
+Their model consists of the following components: 1. A source speech encoder; two transformer-based transcoders (representing transformation into source text and target text, respectively); an attention-based decoder (representing target speech generation).
+\subsubsection{Babu et al., 2021}
+Their model on speech-to-text translation  consists of the following components: 1. A source speech encoder; 2. A quantization step mapping latent encoded representation to discrete features (text generation).
+\subsection{Training}
+\subsubsection{Jia et al., 2019}
+Their model is trained with multiple tasks. Losses from auxiliary decoder networks to predict phoneme sequences corresponding to the source and/or target speech are integrated; otherwise the performance is poor.
+\subsubsection{Kano et al., 2021}
+They started with pretrained speech recognition (ASR), machine translation (MT), and text-to-speech (TTS) models. They allowed the models to attend to all previous contextual information. They then separately trained the transcoders with L1 loss, with the target transcoder hidden states as the target labels.
+\subsubsection{Babu et al., 2021}
+The model is trained using similar approaches with BERT, masks certain 25-ms intervals targeting reconstruction difference as loss. The training set contains speeches from 128 languages with various sizes, and sampling is balanced by an upsampling factor to balance between high / low frequency language records.
+\subsection{Evaluation}
+\subsubsection{Jia et al., 2019}
+Single reference BLEU and Phoneme Error Rate (PER) of auxiliary decoder outputs.
+\subsubsection{Kano et al., 2021}
+BLEU and METEOR scores.
+\subsubsection{Babu et al., 2021}
+The training data includes data from these sets: VoxPopuli, Multilingual LibriSpeech, CommonVoice, VoxLingua107, BABEL, all well-developed benchmarks of previous studies. They come coupled with respective evaluation methods, so evaluation is by respective standards. (Note: however, this might be introducing variances between different datasets’ norms.)
+\subsection{Results}
+\subsubsection{Jia et al., 2019}
+Model achieved BLEU of 31.1 on the Fisher Spanish-English task compared with traditional cascade model of 41.4 and ground truth of 85.3. The performance is nearly as good as traditional models, demonstrating the feasibility of this type of models.
+\subsubsection{Kano et al., 2021}
+Their transcoder model achieved a BLEU of 44.0 and METEOR of 59.3 on English to Spanish vs. 41.3 and 52.1, respectively for traditional cascade model; and 42.9  and METEOR of 58.8 on English to Japanese vs. 41.0 and 51.1, respectively for traditional cascade model. Therefore, this end-to-end model achieved superior performance.
+\subsubsection{Babu et al., 2021}
+On BABEL, the word error rate decreased 2.5-6.8\% on 5 tested languages; even on 0.3B (small-scale) dataset, WER decreased up to 2.2\%. The performance improves with training scale significantly. On CommonVoice / VoxPopuli datasets, the PER (phoneme error rate) were improving all-round but not significantly; on MLS, the improvement compared with previous approaches was not clear. The study also improves on languages / speaker identification, the first of which is partially related to our topic (only partially, because our topic might not need to make out the language but instead directly transform into latent embeddings.)
+
+\subsection{Ideas from the materials:}
+On speech abstraction: previously, how to deal with the high dimensional input of the speech (wave file, consisting of 40,000+ frames / second) input is troubling. If no pre-processing is made, the input would consist of millions of dimensions, making training difficult and prone to overfitting. Here, three papers all adopt a convolutional method to encode speech (e.g. into 25ms sections) and similarity measures.\\
+
+\section{Data}
+The data is the Baidu Speech Translation Corpus (BSTC), constructed from a collection of licensed videos of talks or lectures.  The speeches span over a wide range of domains, including IT, economy, culture, biology, arts etc. The data set is already divided into training, development, and testing sets. The training data sets consists of 68 hours of Mandarin Chinese speech and their transcripts and English text translations. The development and test sets are simultaneous translation (streaming utterance of three human interpreters) dataset of 3 hours of Mandarin Chinese speech.
+
+\section{References}
+1. Kano, Takatomo, Sakriani Sakti, and Satoshi Nakamura. "Transformer-Based Direct Speech-To-Speech Translation with Transcoder." 2021 IEEE Spoken Language Technology Workshop (SLT). IEEE, 2021.
+https://doi.org/10.1109/slt48900.2021.9383496\\
+2. Jia, Ye, et al. "Direct speech-to-speech translation with a sequence-to-sequence model." arXiv preprint arXiv:1904.06037 (2019).\\
+arXiv preprint arXiv:1904.06037.\\
+3. Link to download data:
+https://ai.baidu.com/broad/introduction?dataset=bstc \\
+4. Babu, Arun, et al. "XLS-R: Self-supervised Cross-lingual Speech Representation Learning at Scale." arXiv preprint arXiv:2111.09296 (2021).\\
+5. Google Text-to-Speech library (gTTS) https://pypi.org/project/gTTS/
+\end{document}
