@@ -3,7 +3,9 @@ Implements a direct Chinese-English end-to-end speech-to-speech machine translat
 
 ## Installation
 Speech Recognition
-pocketsphinx
+gTTS
+googletrans
+
 
 ## References
 https://www.thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python
