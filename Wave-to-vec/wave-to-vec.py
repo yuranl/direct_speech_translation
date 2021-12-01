@@ -1,5 +1,4 @@
 from python_speech_features import mfcc
-from python_speech_features import logfbank
 import scipy.io.wavfile as wav
 import os, glob
 import numpy as np
@@ -12,4 +11,4 @@ for filename in glob.glob(os.path.join(path, '*.wav')):
     mfcc_feat = mfcc(sig,rate,winstep=0.015,nfft=2048)
     print(mfcc_feat)
     all_mfcc.append(mfcc_feat)
-    print(len(mfcc_feat))
+    print(np.min(mfcc_feat))
