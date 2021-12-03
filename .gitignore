@@ -130,3 +130,5 @@ dmypy.json
 
 # data
 data_source/
+transcription_translation/
+translation_validation/
