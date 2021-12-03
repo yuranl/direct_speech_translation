@@ -17,7 +17,7 @@ testdataset = [["我上岛咖啡默多克顺丰快递就", "I am learning"]]
 
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
-from torchtext.datasets import Multi30k
+# from torchtext.datasets import Multi30k
 from typing import Iterable, List
 from translationData import translationDataset
 
@@ -167,7 +167,7 @@ def create_mask(src, tgt):
 
     src_padding_mask = (src == PAD_IDX).transpose(0, 1)
     tgt_padding_mask = (tgt == PAD_IDX).transpose(0, 1)
-    print(src_padding_mask.shape)
+    # print(src_padding_mask.shape)
     return src_mask, tgt_mask, src_padding_mask, tgt_padding_mask
 
 torch.manual_seed(0)
@@ -177,7 +177,7 @@ TGT_VOCAB_SIZE = len(vocab_transform[TGT_LANGUAGE])
 EMB_SIZE = 512
 NHEAD = 8
 FFN_HID_DIM = 512
-BATCH_SIZE = 128
+BATCH_SIZE = 64
 NUM_ENCODER_LAYERS = 3
 NUM_DECODER_LAYERS = 3
 
@@ -225,9 +225,9 @@ def collate_fn(batch):
         src_batch.append(text_transform[SRC_LANGUAGE](src_sample.rstrip("\n")))
         tgt_batch.append(text_transform[TGT_LANGUAGE](tgt_sample.rstrip("\n")))
 
-    print(len(src_batch))
+    # print(len(src_batch))
     src_batch = pad_sequence(src_batch, padding_value=PAD_IDX)
-    print(src_batch.shape)
+    # print(src_batch.shape)
     tgt_batch = pad_sequence(tgt_batch, padding_value=PAD_IDX)
     return src_batch, tgt_batch
 
@@ -238,8 +238,9 @@ def train_epoch(model, optimizer):
     losses = 0
     train_iter = translationTrain #Multi30k(split='train', language_pair=(SRC_LANGUAGE, TGT_LANGUAGE))
     train_dataloader = DataLoader(train_iter, batch_size=BATCH_SIZE, collate_fn=collate_fn)
-
-    for src, tgt in train_dataloader:
+    total_step = len(train_dataloader)
+    print(len)
+    for i, (src, tgt) in enumerate(train_dataloader):
         src = src.to(DEVICE)
         # print(src)
         # print(tgt)
@@ -261,6 +262,9 @@ def train_epoch(model, optimizer):
 
         optimizer.step()
         losses += loss.item()
+
+        if (i+1) % 100 == 0:
+            print('Step [{}/{}], Loss: {:.4f}'.format(i+1, total_step, loss.item()))
 
     return losses / len(train_dataloader)
 
@@ -289,7 +293,7 @@ def evaluate(model):
     return losses / len(val_dataloader)
 
 from timeit import default_timer as timer
-NUM_EPOCHS = 20
+NUM_EPOCHS = 30
 
 for epoch in range(1, NUM_EPOCHS+1):
     start_time = timer()
@@ -333,13 +337,13 @@ def translate(model: torch.nn.Module, src_sentence: str):
         model,  src, src_mask, max_len=num_tokens + 5, start_symbol=BOS_IDX).flatten()
     return " ".join(vocab_transform[TGT_LANGUAGE].lookup_tokens(list(tgt_tokens.cpu().numpy()))).replace("<bos>", "").replace("<eos>", "")
 
-print(translate(transformer, "我上岛咖啡默多克顺丰快递就"))
+print(translate(transformer, "你好"))
 
 torch.save(transformer.state_dict(), 'test.pth')
 
 new_trans = Seq2SeqTransformer(NUM_ENCODER_LAYERS, NUM_DECODER_LAYERS, EMB_SIZE,
                                  NHEAD, SRC_VOCAB_SIZE, TGT_VOCAB_SIZE, FFN_HID_DIM)
 new_trans.load_state_dict(torch.load('test.pth'))
-
-print(translate(new_trans, "上岛"))
+new_trans = new_trans.to(DEVICE)
+print(translate(new_trans, "你好"))
 
