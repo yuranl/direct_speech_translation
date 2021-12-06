@@ -132,8 +132,10 @@ dmypy.json
 data_source/
 #transcription_translation/
 #translation_validation/
-eval/output
+eval/data
 eval/*.sgm
+eval/*.wav
+eval/*.json
 
 # trained models (parameters)
 *.pth
