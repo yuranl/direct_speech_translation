@@ -177,9 +177,9 @@ TGT_VOCAB_SIZE = len(vocab_transform[TGT_LANGUAGE])
 EMB_SIZE = 512
 NHEAD = 8
 FFN_HID_DIM = 512
-BATCH_SIZE = 64
-NUM_ENCODER_LAYERS = 3
-NUM_DECODER_LAYERS = 3
+BATCH_SIZE = 32
+NUM_ENCODER_LAYERS = 6
+NUM_DECODER_LAYERS = 6
 
 transformer = Seq2SeqTransformer(NUM_ENCODER_LAYERS, NUM_DECODER_LAYERS, EMB_SIZE,
                                  NHEAD, SRC_VOCAB_SIZE, TGT_VOCAB_SIZE, FFN_HID_DIM)
@@ -293,7 +293,7 @@ def evaluate(model):
     return losses / len(val_dataloader)
 
 from timeit import default_timer as timer
-NUM_EPOCHS = 30
+NUM_EPOCHS = 300
 
 for epoch in range(1, NUM_EPOCHS+1):
     start_time = timer()
@@ -337,13 +337,15 @@ def translate(model: torch.nn.Module, src_sentence: str):
         model,  src, src_mask, max_len=num_tokens + 5, start_symbol=BOS_IDX).flatten()
     return " ".join(vocab_transform[TGT_LANGUAGE].lookup_tokens(list(tgt_tokens.cpu().numpy()))).replace("<bos>", "").replace("<eos>", "")
 
-print(translate(transformer, "你好"))
+print(translate(transformer, "你好吗"))
 
-torch.save(transformer.state_dict(), 'test.pth')
+# torch.save(transformer.state_dict(), 'translatev2.pth')
 
 new_trans = Seq2SeqTransformer(NUM_ENCODER_LAYERS, NUM_DECODER_LAYERS, EMB_SIZE,
                                  NHEAD, SRC_VOCAB_SIZE, TGT_VOCAB_SIZE, FFN_HID_DIM)
-new_trans.load_state_dict(torch.load('test.pth'))
+new_trans.load_state_dict(torch.load('translatev2.pth'))
 new_trans = new_trans.to(DEVICE)
-print(translate(new_trans, "你好"))
+new_trans.eval()
+print(translate(new_trans, "我们要让就是机器人能够能听会说"))
+print(translate(new_trans, "士大夫立刻就了"))
 
