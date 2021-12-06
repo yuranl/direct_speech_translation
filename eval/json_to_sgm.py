@@ -7,13 +7,14 @@ import json
 ####change below parameters####
 
 input_format = ".json"
-mode = "ref" #reference speech
-#mode = "tst" #output speech to be evaluated
+#mode = "ref" #reference speech
+mode = "tst" #output speech to be evaluated
 #mode = "src" #source speech
 setid = "1" #id used to identify this set of data
 
-#input_path = "data/translation/"
-input_path = "data/reference/"
+#input_path = "data/source/"
+input_path = "data/translation/"
+#input_path = "data/reference/"
 
 
 
