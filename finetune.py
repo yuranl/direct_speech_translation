@@ -23,8 +23,8 @@ translation = pipeline("translation_chinese_to_english", model=model, tokenizer=
 text = "我不知道我在干嘛"
 translated_text = translation(text, max_length=40)[0]['translation_text']
 print(translated_text)
-max_input_length = 256
-max_target_length = 256
+max_input_length = 128
+max_target_length = 128
 
 
 def preprocess_function(examples):
@@ -134,7 +134,7 @@ for epoch in range(num_train_epochs):
     # Save and upload
     accelerator.wait_for_everyone()
     unwrapped_model = accelerator.unwrap_model(model)
-    output_dir = "finetuned_model"
+    output_dir = "finetuned_model/" + str(epoch)
     unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
     if accelerator.is_main_process:
         tokenizer.save_pretrained(output_dir)
