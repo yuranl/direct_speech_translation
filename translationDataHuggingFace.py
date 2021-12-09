@@ -46,7 +46,7 @@ class translationDataset(Dataset):
         # if self.transform:
         #     sample = self.transform(sample)
         #
-        return {self.source[idx], self.target[idx]}
+        return {'source': self.source[idx], 'targer':self.target[idx]}
 
 
 

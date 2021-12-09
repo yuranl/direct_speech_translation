@@ -1,4 +1,4 @@
-from transformers import AutoModelWithLMHead, AutoTokenizer
+from transformers import AutoModelWithLMHead, AutoTokenizer, AutoModelForSeq2SeqLM
 from transformers import pipeline
 from transformers import DataCollatorForSeq2Seq
 from torch.utils.data import DataLoader
@@ -7,14 +7,15 @@ from transformers import AdamW
 from accelerate import Accelerator
 from transformers import get_scheduler
 from tqdm.auto import tqdm
+from datasets import load_dataset, load_metric
 import torch
 
-
-translationTrain = translationDataset('./transcription_translation/')
-translationValidation = translationDataset('./translation_validation/')
+split_datasets  = load_dataset('json', data_files={'train': './transcription_translation/*.json', 'validation': './translation_validation/*.json'})
+# translationTrain = translationDataset('./transcription_translation/')
+# translationValidation = translationDataset('./translation_validation/')
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-model = AutoModelWithLMHead.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
+model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
 tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-zh-en", return_tensors="pt")
 
 data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
@@ -22,21 +23,42 @@ translation = pipeline("translation_chinese_to_english", model=model, tokenizer=
 text = "我不知道我在干嘛"
 translated_text = translation(text, max_length=40)[0]['translation_text']
 print(translated_text)
+max_input_length = 256
+max_target_length = 256
+
+
+def preprocess_function(examples):
+    inputs = [ex for ex in examples["transcript"]]
+    targets = [ex for ex in examples["translation"]]
+    model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
+
+    # Set up the tokenizer for targets
+    with tokenizer.as_target_tokenizer():
+        labels = tokenizer(targets, max_length=max_target_length, truncation=True)
+
+    model_inputs["labels"] = labels["input_ids"]
+    return model_inputs
+
+tokenized_datasets = split_datasets.map(
+    preprocess_function,
+    batched=True,
+    remove_columns=split_datasets["train"].column_names,
+)
 train_dataloader = DataLoader(
-    translationTrain,
+    tokenized_datasets["train"],
     shuffle=True,
     collate_fn=data_collator,
-    batch_size=16,
+    batch_size=8,
 )
 eval_dataloader = DataLoader(
-    translationValidation, collate_fn=data_collator, batch_size=8
+    tokenized_datasets["validation"], collate_fn=data_collator, batch_size=8
 )
 optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay = 0.001)
 accelerator = Accelerator()
 model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
     model, optimizer, train_dataloader, eval_dataloader
 )
-
+metric = load_metric("sacrebleu")
 
 num_train_epochs = 1
 num_update_steps_per_epoch = len(train_dataloader)
