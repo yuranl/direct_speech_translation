@@ -9,6 +9,8 @@ from transformers import get_scheduler
 from tqdm.auto import tqdm
 from datasets import load_dataset, load_metric
 import torch
+import numpy as np
+#from sacrebleu.metrics import BLEU
 
 split_datasets  = load_dataset('json', data_files={'train': './transcription_translation/*.json', 'validation': './translation_validation/*.json'})
 # translationTrain = translationDataset('./transcription_translation/')
@@ -53,14 +55,15 @@ train_dataloader = DataLoader(
 eval_dataloader = DataLoader(
     tokenized_datasets["validation"], collate_fn=data_collator, batch_size=8
 )
-optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay = 0.001)
+optimizer = AdamW(model.parameters(), lr=2e-5)
 accelerator = Accelerator()
 model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
     model, optimizer, train_dataloader, eval_dataloader
 )
 metric = load_metric("sacrebleu")
+#metric = BLEU
 
-num_train_epochs = 1
+num_train_epochs = 20
 num_update_steps_per_epoch = len(train_dataloader)
 num_training_steps = num_train_epochs * num_update_steps_per_epoch
 
@@ -91,10 +94,14 @@ def postprocess(predictions, labels):
 
 
 progress_bar = tqdm(range(num_training_steps))
-
+loss_train = []
+loss_eval = []
 for epoch in range(num_train_epochs):
     # Training
     model.train()
+    loss_cumu = 0
+    
+    i = 0
     for batch in train_dataloader:
         outputs = model(**batch)
         loss = outputs.loss
@@ -105,31 +112,53 @@ for epoch in range(num_train_epochs):
         optimizer.zero_grad()
         progress_bar.update(1)
 
+        i += 1
+        loss_cumu += loss.item()
+    
+    loss_cumu /= i
+    loss_train.append(loss_cumu)
+    print(f"epoch {epoch + 1}, Training Loss: {loss_cumu:.2f}")
+
     # Evaluation
     model.eval()
+    loss_eval_cumu = 0
+    i = 0
     for batch in tqdm(eval_dataloader):
         with torch.no_grad():
-            generated_tokens = accelerator.unwrap_model(model).generate(
-                batch["input_ids"],
-                attention_mask=batch["attention_mask"],
-                max_length=512,
+            outputs = model(**batch)
+            loss = outputs.loss
+            i += 1
+            loss_eval_cumu += loss.item()
+        
+    loss_eval_cumu /= i
+    loss_eval.append(loss_eval_cumu)
+    print(loss_eval_cumu)
+    print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
+    if epoch % 5 == 0:
+        model.eval()
+        for batch in tqdm(eval_dataloader):
+            with torch.no_grad():
+                generated_tokens = accelerator.unwrap_model(model).generate(
+                    batch["input_ids"],
+                    attention_mask=batch["attention_mask"],
+                    max_length=512,
+                )
+            labels = batch["labels"]
+
+            # Necessary to pad predictions and labels for being gathered
+            generated_tokens = accelerator.pad_across_processes(
+                generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
             )
-        labels = batch["labels"]
+            labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
 
-        # Necessary to pad predictions and labels for being gathered
-        generated_tokens = accelerator.pad_across_processes(
-            generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
-        )
-        labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
+            predictions_gathered = accelerator.gather(generated_tokens)
+            labels_gathered = accelerator.gather(labels)
 
-        predictions_gathered = accelerator.gather(generated_tokens)
-        labels_gathered = accelerator.gather(labels)
+            decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
+            metric.add_batch(predictions=decoded_preds, references=decoded_labels)
 
-        decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
-        metric.add_batch(predictions=decoded_preds, references=decoded_labels)
-
-    results = metric.compute()
-    print(f"epoch {epoch}, BLEU score: {results['score']:.2f}")
+        results = metric.compute()
+        print(f"epoch {epoch + 1}, BLEU score: {results['score']:.2f}")
 
     # Save and upload
     accelerator.wait_for_everyone()
@@ -138,3 +167,5 @@ for epoch in range(num_train_epochs):
     unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
     if accelerator.is_main_process:
         tokenizer.save_pretrained(output_dir)
+print(loss_train)
+print(loss_eval)
