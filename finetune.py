@@ -19,6 +19,7 @@ split_datasets  = load_dataset('json', data_files={'train': './transcription_tra
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
+#print(model)
 tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-zh-en", return_tensors="pt")
 
 data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
