@@ -50,12 +50,12 @@ train_dataloader = DataLoader(
     tokenized_datasets["train"],
     shuffle=True,
     collate_fn=data_collator,
-    batch_size=8,
+    batch_size=16,
 )
 eval_dataloader = DataLoader(
-    tokenized_datasets["validation"], collate_fn=data_collator, batch_size=8
+    tokenized_datasets["validation"], collate_fn=data_collator, batch_size=16
 )
-optimizer = AdamW(model.parameters(), lr=2e-5)
+optimizer = AdamW(model.parameters(), lr=1e-5)
 accelerator = Accelerator()
 model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
     model, optimizer, train_dataloader, eval_dataloader
@@ -75,7 +75,6 @@ lr_scheduler = get_scheduler(
 )
 
 
-
 def postprocess(predictions, labels):
     predictions = predictions.cpu().numpy()
     labels = labels.cpu().numpy()
@@ -91,8 +90,45 @@ def postprocess(predictions, labels):
     decoded_labels = [[label.strip()] for label in decoded_labels]
     return decoded_preds, decoded_labels
 
+def pretrained_performance():
+    model.eval()
+    loss_eval_cumu = 0
+    i = 0
+    for batch in tqdm(eval_dataloader):
+        with torch.no_grad():
+            outputs = model(**batch)
+            loss = outputs.loss
+            i += 1
+            loss_eval_cumu += loss.item()
+        
+    loss_eval_cumu /= i
+    print(f"Before training, Validation Loss: {loss_eval_cumu:.2f}")
+        
+    for batch in tqdm(eval_dataloader):
+        with torch.no_grad():
+            generated_tokens = accelerator.unwrap_model(model).generate(
+                batch["input_ids"],
+                attention_mask=batch["attention_mask"],
+                max_length=512,
+            )
+        labels = batch["labels"]
+
+        # Necessary to pad predictions and labels for being gathered
+        generated_tokens = accelerator.pad_across_processes(
+            generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
+        )
+        labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
+
+        predictions_gathered = accelerator.gather(generated_tokens)
+        labels_gathered = accelerator.gather(labels)
+
+        decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
+        metric.add_batch(predictions=decoded_preds, references=decoded_labels)
+    results = metric.compute()
+    print(f"Before training, BLEU score: {results['score']:.2f}")
 
 
+pretrained_performance()
 progress_bar = tqdm(range(num_training_steps))
 loss_train = []
 loss_eval = []
@@ -132,7 +168,6 @@ for epoch in range(num_train_epochs):
         
     loss_eval_cumu /= i
     loss_eval.append(loss_eval_cumu)
-    print(loss_eval_cumu)
     print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
     if epoch % 5 == 0:
         model.eval()
@@ -163,9 +198,16 @@ for epoch in range(num_train_epochs):
     # Save and upload
     accelerator.wait_for_everyone()
     unwrapped_model = accelerator.unwrap_model(model)
-    output_dir = "finetuned_model/" + str(epoch)
+    output_dir = "finetuned_model/" + str(epoch + 1)
     unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
     if accelerator.is_main_process:
         tokenizer.save_pretrained(output_dir)
+
 print(loss_train)
+# [2.282253554751796, 2.05841838108973, 1.9250032483287283, 1.8195626936160183, 1.733216897190409, 1.6580969759985889, 1.591225100903855, 1.5336571980755516, 1.4812494712604292,1.435242395784416,
+# 1.3950268624516546, 1.3606918328061728, 1.3294000998563513, 1.3001842817726352, 1.2769479078914001, 1.2572869315206212, 1.2393105868709609, 1.2250999408496626, 1.2153578630774027, 1.2093690811343618]
 print(loss_eval)
+# [2.282338900420502, 2.267384870361736, 2.264929485002547, 2.2666508701011425, 2.2798181569758262, 2.2922261036534346, 2.306174605174829, 2.317114326107593, 2.328502018033093, 2.3420375635605732,
+# 2.3550392694145668, 2.365725151455129, 2.3725518775350265, 2.386785459427433, 2.393552503513016, 2.3997718673625976, 2.4036135395974605, 2.410205786009781, 2.4129696329131383, 2.413819869056003]
+
+# BLEU: 0 - 12.39, 1 - 15.50, 6 - 15.73, 11 - 15.63, 16 - 15.42
