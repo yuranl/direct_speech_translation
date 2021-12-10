@@ -2,6 +2,7 @@ from transformers import AutoModelWithLMHead, AutoTokenizer, AutoModelForSeq2Seq
 from transformers import pipeline
 from transformers import DataCollatorForSeq2Seq
 from torch.utils.data import DataLoader
+from transformers import get_cosine_with_hard_restarts_schedule_with_warmup
 from translationData import translationDataset
 from transformers import AdamW
 from accelerate import Accelerator
@@ -73,7 +74,14 @@ lr_scheduler = get_scheduler(
     num_warmup_steps=0,
     num_training_steps=num_training_steps,
 )
-
+wu_scheduler = get_cosine_with_hard_restarts_schedule_with_warmup(
+    optimizer=optimizer,
+    num_warmup_steps=num_update_steps_per_epoch * 2,
+    num_training_steps=num_training_steps,
+    num_cycles=6,
+)
+print(lr_scheduler)
+print(wu_scheduler)
 
 def postprocess(predictions, labels):
     predictions = predictions.cpu().numpy()
@@ -88,6 +96,9 @@ def postprocess(predictions, labels):
     # Some simple post-processing
     decoded_preds = [pred.strip() for pred in decoded_preds]
     decoded_labels = [[label.strip()] for label in decoded_labels]
+    for i in range(len(decoded_labels)):
+        if (decoded_labels[i] == ['']):
+            decoded_labels[i] = ['This sentence was corrupted. Developer notes']
     return decoded_preds, decoded_labels
 
 def pretrained_performance():
@@ -144,7 +155,8 @@ for epoch in range(num_train_epochs):
         accelerator.backward(loss)
 
         optimizer.step()
-        lr_scheduler.step()
+        # lr_scheduler.step()
+        wu_scheduler.step()
         optimizer.zero_grad()
         progress_bar.update(1)
 
@@ -169,8 +181,40 @@ for epoch in range(num_train_epochs):
     loss_eval_cumu /= i
     loss_eval.append(loss_eval_cumu)
     print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
+
     if epoch % 5 == 0:
         model.eval()
+
+        # Training BLEU
+        train_batch_count = 0
+        for batch in tqdm(train_dataloader):
+            train_batch_count += 1
+            if (train_batch_count > 262): break
+            with torch.no_grad():
+                generated_tokens = accelerator.unwrap_model(model).generate(
+                    batch["input_ids"],
+                    attention_mask=batch["attention_mask"],
+                    max_length=512,
+                )
+            labels = batch["labels"]
+
+            # Necessary to pad predictions and labels for being gathered
+            generated_tokens = accelerator.pad_across_processes(
+                generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
+            )
+            labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
+
+            predictions_gathered = accelerator.gather(generated_tokens)
+            labels_gathered = accelerator.gather(labels)
+
+            decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
+
+            metric.add_batch(predictions=decoded_preds, references=decoded_labels)
+        
+        results = metric.compute()
+        print(f"epoch {epoch + 1}, Training BLEU score: {results['score']:.2f}")
+
+        # Validation BLEU
         for batch in tqdm(eval_dataloader):
             with torch.no_grad():
                 generated_tokens = accelerator.unwrap_model(model).generate(
@@ -193,7 +237,8 @@ for epoch in range(num_train_epochs):
             metric.add_batch(predictions=decoded_preds, references=decoded_labels)
 
         results = metric.compute()
-        print(f"epoch {epoch + 1}, BLEU score: {results['score']:.2f}")
+        print(f"epoch {epoch + 1}, Validation BLEU score: {results['score']:.2f}")
+
 
     # Save and upload
     accelerator.wait_for_everyone()
