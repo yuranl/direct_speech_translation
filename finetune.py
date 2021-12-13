@@ -2,7 +2,7 @@ from transformers import AutoModelWithLMHead, AutoTokenizer, AutoModelForSeq2Seq
 from transformers import pipeline
 from transformers import DataCollatorForSeq2Seq
 from torch.utils.data import DataLoader
-from transformers import get_cosine_with_hard_restarts_schedule_with_warmup
+from transformers import get_cosine_with_hard_restarts_schedule_with_warmup, get_cosine_schedule_with_warmup
 from translationData import translationDataset
 from transformers import AdamW
 from accelerate import Accelerator
@@ -16,7 +16,7 @@ import numpy as np
 split_datasets  = load_dataset('json', data_files={'train': './transcription_translation/*.json', 'validation': './translation_validation/*.json'})
 # translationTrain = translationDataset('./transcription_translation/')
 # translationValidation = translationDataset('./translation_validation/')
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
 #print(model)
@@ -24,11 +24,11 @@ tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-zh-en", return_t
 
 data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
 translation = pipeline("translation_chinese_to_english", model=model, tokenizer=tokenizer)
-text = "我不知道我在干嘛"
+text = "我不知道我在干嘛, 这句话是用来测试的"
 translated_text = translation(text, max_length=40)[0]['translation_text']
 print(translated_text)
-max_input_length = 128
-max_target_length = 128
+max_input_length = 256
+max_target_length = 256
 
 
 def preprocess_function(examples):
@@ -57,7 +57,8 @@ train_dataloader = DataLoader(
 eval_dataloader = DataLoader(
     tokenized_datasets["validation"], collate_fn=data_collator, batch_size=16
 )
-optimizer = AdamW(model.parameters(), lr=1e-5)
+
+optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=0.0001)
 accelerator = Accelerator()
 model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
     model, optimizer, train_dataloader, eval_dataloader
@@ -81,8 +82,14 @@ wu_scheduler = get_cosine_with_hard_restarts_schedule_with_warmup(
     num_training_steps=num_training_steps,
     num_cycles=6,
 )
-print(lr_scheduler)
-print(wu_scheduler)
+cosine_scheduler = get_cosine_schedule_with_warmup(
+    optimizer = optimizer,
+    num_warmup_steps=num_update_steps_per_epoch * 2,
+    num_training_steps=num_training_steps,
+    num_cycles=6
+)
+# print(lr_scheduler)
+# print(wu_scheduler)
 
 def postprocess(predictions, labels):
     predictions = predictions.cpu().numpy()
@@ -100,6 +107,7 @@ def postprocess(predictions, labels):
     for i in range(len(decoded_labels)):
         if (decoded_labels[i] == ['']):
             decoded_labels[i] = ['This sentence was corrupted. Developer notes']
+            print(labels[i])
     return decoded_preds, decoded_labels
 
 def pretrained_performance():
@@ -157,7 +165,8 @@ for epoch in range(num_train_epochs):
 
         optimizer.step()
         # lr_scheduler.step()
-        wu_scheduler.step()
+        # wu_scheduler.step()
+        cosine_scheduler.step()
         optimizer.zero_grad()
         progress_bar.update(1)
 

@@ -140,6 +140,7 @@ eval/*.json
 # trained models (parameters)
 *.pth
 finetuned_model
+saved_model
 *.bin
 
 # Pycharm file
