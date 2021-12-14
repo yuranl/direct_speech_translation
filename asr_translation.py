@@ -23,12 +23,14 @@ class asr_translation_model(nn.Module):
     def __init__(self):
         super(asr_translation_model, self).__init__()
         self.asr_model = Wav2Vec2ForCTC.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
-        self.conv = nn.Conv1d(21128, 512, 5, 5,bias=True)
+        self.conv1 = nn.Conv1d(21128, 1, 1, 10,bias=True)
+        self.relu = nn.ReLU()
+        self.conv2 = nn.Conv1d(1, 512, 1, bias=True)
         self.translation_model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
 
     def forward(self, batch):
-        logits = self.asr_model(batch.audio_inputs, attention_mask=batch.audio_inputs_mask).logits
-        translation_input = self.conv(logits.transpose(1, 2))
+        logits = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
+        translation_input = self.conv2(self.relu(self.conv1(logits.transpose(1, 2))))
         length = translation_input.shape[2]
         batch_size = translation_input.shape[0]
         new_attention_mask = torch.ones(batch_size,length, device=translation_input.device)
@@ -36,7 +38,7 @@ class asr_translation_model(nn.Module):
         return outputs
 
     def generate(self, batch, max_length=512):
-        logits = self.asr_model(batch.audio_inputs, attention_mask=batch.audio_inputs_mask).logits
+        logits = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
         translation_input = self.conv(logits.transpose(1, 2))
         length = translation_input.shape[2]
         batch_size = translation_input.shape[0]
@@ -71,11 +73,11 @@ def postprocess(predictions, labels):
     return decoded_preds, decoded_labels
 
 def preprocess_function(examples):
-    inputs = [ex for ex in examples["transcript"]]
+    # inputs = [ex for ex in examples["transcript"]]
     targets = [ex for ex in examples["translation"]]
 
-    model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
-
+    # model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
+    model_inputs = {}
     # Set up the tokenizer for targets
     with tokenizer.as_target_tokenizer():
         labels = tokenizer(targets, max_length=max_target_length, truncation=True)
@@ -87,7 +89,7 @@ def preprocess_function(examples):
     wav_files_unique = list(set(wav_files))
     wav_dic = {}
     for i in range(len(wav_files_unique)):
-        speech_array, sampling_rate = torchaudio.load('../audio_train/' + str(wav_files_unique[i]) + '.wav')
+        speech_array, sampling_rate = torchaudio.load('./data_source/audio_train/' + str(wav_files_unique[i]) + '.wav')
         resampler = torchaudio.transforms.Resample(sampling_rate, 16000)
         speech = resampler(speech_array.squeeze(0)).numpy()
         print(speech.shape)
@@ -101,6 +103,8 @@ def preprocess_function(examples):
     audio_batch_inputs = processor(batch_speech_sample, sampling_rate=16_000, return_tensors="pt", padding=True)
     model_inputs["audio_inputs"] = audio_batch_inputs.input_values.tolist()
     model_inputs["audio_inputs_mask"] = audio_batch_inputs.attention_mask.tolist()
+    # del model_inputs['input_ids']
+    # del model_inputs['attention_mask']
     return model_inputs
 
 def pretrained_performance():
@@ -150,13 +154,13 @@ for wdecay in [0.0002]:
     processor = Wav2Vec2Processor.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
     # asr_model = Wav2Vec2ForCTC.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
 
-    data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
+    # data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
     # translation = pipeline("translation_chinese_to_english", model=model, tokenizer=tokenizer)
     # text = "我不知道我在干嘛, 这句话是用来测试的"
     # translated_text = translation(text, max_length=40)[0]['translation_text']
     # print(translated_text)
-    max_input_length = 128
-    max_target_length = 128
+    max_input_length = 64
+    max_target_length = 64
 
     tokenized_datasets = split_datasets.map(
         preprocess_function,
@@ -166,11 +170,13 @@ for wdecay in [0.0002]:
     train_dataloader = DataLoader(
         tokenized_datasets["train"],
         shuffle=True,
-        collate_fn=data_collator,
+        # collate_fn=data_collator,
         batch_size=1,
     )
     eval_dataloader = DataLoader(
-        tokenized_datasets["validation"], collate_fn=data_collator, batch_size=1
+        tokenized_datasets["validation"], 
+        # collate_fn=data_collator, 
+        batch_size=1
     )
 
 
@@ -232,7 +238,7 @@ for wdecay in [0.0002]:
             progress_bar.update(1)
 
             i += 1
-            loss_cumu += loss.item()
+            loss_cumu += float(loss.item())
 
         loss_cumu /= i
         loss_train.append(loss_cumu)
@@ -247,7 +253,7 @@ for wdecay in [0.0002]:
                 outputs = model(batch)
                 loss = outputs.loss
                 i += 1
-                loss_eval_cumu += loss.item()
+                loss_eval_cumu += float(loss.item())
 
         loss_eval_cumu /= i
         loss_eval.append(loss_eval_cumu)
