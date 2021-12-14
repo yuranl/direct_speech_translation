@@ -96,7 +96,7 @@ eval_dataloader = DataLoader(
     tokenized_datasets["validation"], collate_fn=data_collator, batch_size=16
 )
 
-optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=0.0001)
+optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=0.0002)
 accelerator = Accelerator()
 model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
     model, optimizer, train_dataloader, eval_dataloader
@@ -104,7 +104,7 @@ model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
 metric = load_metric("sacrebleu")
 #metric = BLEU
 
-num_train_epochs = 20
+num_train_epochs = 10
 num_update_steps_per_epoch = len(train_dataloader)
 num_training_steps = num_train_epochs * num_update_steps_per_epoch
 
@@ -182,7 +182,7 @@ def pretrained_performance():
 
         decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
 
-        print(decoded_preds, decoded_labels) ############################################## ZYZ Print
+        #print(decoded_preds, decoded_labels) ############################################## ZYZ Print
 
         metric.add_batch(predictions=decoded_preds, references=decoded_labels)
     results = metric.compute()
@@ -233,7 +233,7 @@ for epoch in range(num_train_epochs):
     loss_eval.append(loss_eval_cumu)
     print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
 
-    if epoch % 5 == 0:
+    if epoch in [0, 1, 2, 3, 4, 7, 9]:
         model.eval()
 
         # Training BLEU

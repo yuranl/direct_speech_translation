@@ -18,78 +18,6 @@ split_datasets  = load_dataset('json', data_files={'train': './transcription_tra
 # translationValidation = translationDataset('./translation_validation/')
 # DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
-#print(model)
-tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-zh-en", return_tensors="pt")
-
-data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
-translation = pipeline("translation_chinese_to_english", model=model, tokenizer=tokenizer)
-text = "我不知道我在干嘛, 这句话是用来测试的"
-translated_text = translation(text, max_length=40)[0]['translation_text']
-print(translated_text)
-max_input_length = 256
-max_target_length = 256
-
-
-def preprocess_function(examples):
-    inputs = [ex for ex in examples["transcript"]]
-    targets = [ex for ex in examples["translation"]]
-    model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
-
-    # Set up the tokenizer for targets
-    with tokenizer.as_target_tokenizer():
-        labels = tokenizer(targets, max_length=max_target_length, truncation=True)
-
-    model_inputs["labels"] = labels["input_ids"]
-    return model_inputs
-
-tokenized_datasets = split_datasets.map(
-    preprocess_function,
-    batched=True,
-    remove_columns=split_datasets["train"].column_names,
-)
-train_dataloader = DataLoader(
-    tokenized_datasets["train"],
-    shuffle=True,
-    collate_fn=data_collator,
-    batch_size=16,
-)
-eval_dataloader = DataLoader(
-    tokenized_datasets["validation"], collate_fn=data_collator, batch_size=16
-)
-
-optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=0.0001)
-accelerator = Accelerator()
-model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
-    model, optimizer, train_dataloader, eval_dataloader
-)
-metric = load_metric("sacrebleu")
-#metric = BLEU
-
-num_train_epochs = 20
-num_update_steps_per_epoch = len(train_dataloader)
-num_training_steps = num_train_epochs * num_update_steps_per_epoch
-
-lr_scheduler = get_scheduler(
-    "linear",
-    optimizer=optimizer,
-    num_warmup_steps=0,
-    num_training_steps=num_training_steps,
-)
-wu_scheduler = get_cosine_with_hard_restarts_schedule_with_warmup(
-    optimizer=optimizer,
-    num_warmup_steps=num_update_steps_per_epoch * 2,
-    num_training_steps=num_training_steps,
-    num_cycles=6,
-)
-cosine_scheduler = get_cosine_schedule_with_warmup(
-    optimizer = optimizer,
-    num_warmup_steps=num_update_steps_per_epoch * 2,
-    num_training_steps=num_training_steps,
-    num_cycles=6
-)
-# print(lr_scheduler)
-# print(wu_scheduler)
 
 def postprocess(predictions, labels):
     predictions = predictions.cpu().numpy()
@@ -110,6 +38,7 @@ def postprocess(predictions, labels):
             print(labels[i])
     return decoded_preds, decoded_labels
 
+
 def pretrained_performance():
     model.eval()
     loss_eval_cumu = 0
@@ -120,10 +49,10 @@ def pretrained_performance():
             loss = outputs.loss
             i += 1
             loss_eval_cumu += loss.item()
-        
+
     loss_eval_cumu /= i
     print(f"Before training, Validation Loss: {loss_eval_cumu:.2f}")
-        
+
     for batch in tqdm(eval_dataloader):
         with torch.no_grad():
             generated_tokens = accelerator.unwrap_model(model).generate(
@@ -147,116 +76,201 @@ def pretrained_performance():
     results = metric.compute()
     print(f"Before training, BLEU score: {results['score']:.2f}")
 
+def preprocess_function(examples):
+    inputs = [ex for ex in examples["transcript"]]
+    targets = [ex for ex in examples["translation"]]
+    model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
 
-pretrained_performance()
-progress_bar = tqdm(range(num_training_steps))
-loss_train = []
-loss_eval = []
-for epoch in range(num_train_epochs):
-    # Training
-    model.train()
-    loss_cumu = 0
-    
-    i = 0
-    for batch in train_dataloader:
-        outputs = model(**batch)
-        loss = outputs.loss
-        accelerator.backward(loss)
+    # Set up the tokenizer for targets
+    with tokenizer.as_target_tokenizer():
+        labels = tokenizer(targets, max_length=max_target_length, truncation=True)
 
-        optimizer.step()
-        # lr_scheduler.step()
-        # wu_scheduler.step()
-        cosine_scheduler.step()
-        optimizer.zero_grad()
-        progress_bar.update(1)
+    model_inputs["labels"] = labels["input_ids"]
+    return model_inputs
 
-        i += 1
-        loss_cumu += loss.item()
-    
-    loss_cumu /= i
-    loss_train.append(loss_cumu)
-    print(f"epoch {epoch + 1}, Training Loss: {loss_cumu:.2f}")
 
-    # Evaluation
-    model.eval()
-    loss_eval_cumu = 0
-    i = 0
-    for batch in tqdm(eval_dataloader):
-        with torch.no_grad():
+
+
+
+
+for wdecay in [0.0002]:
+
+    model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
+    #print(model)
+    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-zh-en", return_tensors="pt")
+
+    data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
+    translation = pipeline("translation_chinese_to_english", model=model, tokenizer=tokenizer)
+    text = "我不知道我在干嘛, 这句话是用来测试的"
+    translated_text = translation(text, max_length=40)[0]['translation_text']
+    print(translated_text)
+    max_input_length = 256
+    max_target_length = 256
+
+    tokenized_datasets = split_datasets.map(
+        preprocess_function,
+        batched=True,
+        remove_columns=split_datasets["train"].column_names,
+    )
+    train_dataloader = DataLoader(
+        tokenized_datasets["train"],
+        shuffle=True,
+        collate_fn=data_collator,
+        batch_size=16,
+    )
+    eval_dataloader = DataLoader(
+        tokenized_datasets["validation"], collate_fn=data_collator, batch_size=16
+    )
+
+
+
+    print("weight decay: " + str(wdecay))
+    optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=wdecay)
+    accelerator = Accelerator()
+    model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
+        model, optimizer, train_dataloader, eval_dataloader
+    )
+    metric = load_metric("sacrebleu")
+    #metric = BLEU
+
+    num_train_epochs = 8
+    num_update_steps_per_epoch = len(train_dataloader)
+    num_training_steps = num_train_epochs * num_update_steps_per_epoch
+
+    lr_scheduler = get_scheduler(
+        "linear",
+        optimizer=optimizer,
+        num_warmup_steps=0,
+        num_training_steps=num_training_steps,
+    )
+    wu_scheduler = get_cosine_with_hard_restarts_schedule_with_warmup(
+        optimizer=optimizer,
+        num_warmup_steps=num_update_steps_per_epoch * 2,
+        num_training_steps=num_training_steps,
+        num_cycles=6,
+    )
+    cosine_scheduler = get_cosine_schedule_with_warmup(
+        optimizer = optimizer,
+        num_warmup_steps=num_update_steps_per_epoch * 2,
+        num_training_steps=num_training_steps,
+        num_cycles=6
+    )
+    # print(lr_scheduler)
+    # print(wu_scheduler)
+
+    pretrained_performance()
+    progress_bar = tqdm(range(num_training_steps))
+    loss_train = []
+    loss_eval = []
+    for epoch in range(num_train_epochs):
+        # Training
+        model.train()
+        loss_cumu = 0
+
+        i = 0
+        for batch in train_dataloader:
             outputs = model(**batch)
             loss = outputs.loss
+            accelerator.backward(loss)
+
+            optimizer.step()
+            # lr_scheduler.step()
+            # wu_scheduler.step()
+            cosine_scheduler.step()
+            optimizer.zero_grad()
+            progress_bar.update(1)
+
             i += 1
-            loss_eval_cumu += loss.item()
-        
-    loss_eval_cumu /= i
-    loss_eval.append(loss_eval_cumu)
-    print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
+            loss_cumu += loss.item()
 
-    if epoch % 5 == 0:
+        loss_cumu /= i
+        loss_train.append(loss_cumu)
+        print(f"epoch {epoch + 1}, Training Loss: {loss_cumu:.2f}")
+
+        # Evaluation
         model.eval()
-
-        # Training BLEU
-        train_batch_count = 0
-        for batch in tqdm(train_dataloader):
-            train_batch_count += 1
-            if (train_batch_count > 262): break
-            with torch.no_grad():
-                generated_tokens = accelerator.unwrap_model(model).generate(
-                    batch["input_ids"],
-                    attention_mask=batch["attention_mask"],
-                    max_length=512,
-                )
-            labels = batch["labels"]
-
-            # Necessary to pad predictions and labels for being gathered
-            generated_tokens = accelerator.pad_across_processes(
-                generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
-            )
-            labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
-
-            predictions_gathered = accelerator.gather(generated_tokens)
-            labels_gathered = accelerator.gather(labels)
-
-            decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
-
-            metric.add_batch(predictions=decoded_preds, references=decoded_labels)
-        
-        results = metric.compute()
-        print(f"epoch {epoch + 1}, Training BLEU score: {results['score']:.2f}")
-
-        # Validation BLEU
+        loss_eval_cumu = 0
+        i = 0
         for batch in tqdm(eval_dataloader):
             with torch.no_grad():
-                generated_tokens = accelerator.unwrap_model(model).generate(
-                    batch["input_ids"],
-                    attention_mask=batch["attention_mask"],
-                    max_length=512,
+                outputs = model(**batch)
+                loss = outputs.loss
+                i += 1
+                loss_eval_cumu += loss.item()
+
+        loss_eval_cumu /= i
+        loss_eval.append(loss_eval_cumu)
+        print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
+
+        if epoch in [0, 1, 2, 3, 4, 7]:
+            model.eval()
+
+            # Training BLEU
+            train_batch_count = 0
+            for batch in tqdm(train_dataloader):
+                train_batch_count += 1
+                if (train_batch_count > 262): break
+                with torch.no_grad():
+                    generated_tokens = accelerator.unwrap_model(model).generate(
+                        batch["input_ids"],
+                        attention_mask=batch["attention_mask"],
+                        max_length=512,
+                    )
+                labels = batch["labels"]
+
+                # Necessary to pad predictions and labels for being gathered
+                generated_tokens = accelerator.pad_across_processes(
+                    generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
                 )
-            labels = batch["labels"]
+                labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
 
-            # Necessary to pad predictions and labels for being gathered
-            generated_tokens = accelerator.pad_across_processes(
-                generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
-            )
-            labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
+                predictions_gathered = accelerator.gather(generated_tokens)
+                labels_gathered = accelerator.gather(labels)
 
-            predictions_gathered = accelerator.gather(generated_tokens)
-            labels_gathered = accelerator.gather(labels)
+                decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
 
-            decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
-            metric.add_batch(predictions=decoded_preds, references=decoded_labels)
+                metric.add_batch(predictions=decoded_preds, references=decoded_labels)
 
-        results = metric.compute()
-        print(f"epoch {epoch + 1}, Validation BLEU score: {results['score']:.2f}")
+            results = metric.compute()
+            print(f"epoch {epoch + 1}, Training BLEU score: {results['score']:.2f}")
+
+            # Validation BLEU
+            for batch in tqdm(eval_dataloader):
+                with torch.no_grad():
+                    generated_tokens = accelerator.unwrap_model(model).generate(
+                        batch["input_ids"],
+                        attention_mask=batch["attention_mask"],
+                        max_length=512,
+                    )
+                labels = batch["labels"]
+
+                # Necessary to pad predictions and labels for being gathered
+                generated_tokens = accelerator.pad_across_processes(
+                    generated_tokens, dim=1, pad_index=tokenizer.pad_token_id
+                )
+                labels = accelerator.pad_across_processes(labels, dim=1, pad_index=-100)
+
+                predictions_gathered = accelerator.gather(generated_tokens)
+                labels_gathered = accelerator.gather(labels)
+
+                decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
+                metric.add_batch(predictions=decoded_preds, references=decoded_labels)
+
+            results = metric.compute()
+            print("validation reference:")
+            print(decoded_labels[0:20])
+            print("model predictions:")
+            print(decoded_preds[0:20])
+            print(f"epoch {epoch + 1}, Validation BLEU score: {results['score']:.2f}")
 
 
-    # Save and upload
-    accelerator.wait_for_everyone()
-    unwrapped_model = accelerator.unwrap_model(model)
-    output_dir = "finetuned_model/" + str(epoch + 1)
-    unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
-    if accelerator.is_main_process:
-        tokenizer.save_pretrained(output_dir)
+            # Save and upload
+            accelerator.wait_for_everyone()
+            unwrapped_model = accelerator.unwrap_model(model)
+            output_dir = "finetuned_model/" + str(epoch + 1)
+            unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
+            if accelerator.is_main_process:
+                tokenizer.save_pretrained(output_dir)
 
 print(loss_train)
 # [2.282253554751796, 2.05841838108973, 1.9250032483287283, 1.8195626936160183, 1.733216897190409, 1.6580969759985889, 1.591225100903855, 1.5336571980755516, 1.4812494712604292,1.435242395784416,

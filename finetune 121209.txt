@@ -1,0 +1,36 @@
+thought: if we have ran through the entire dataset, haven't we already made all observations?
+
+2e-5:
+
+
+  0%|          | 0/262 [00:00<?, ?it/s]Before training, Validation Loss: 2.60
+  0%|          | 0/16864 [00:00<?, ?it/s]Before training, BLEU score: 12.39
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 1, Training Loss: 2.38
+epoch 1, Validation Loss: 2.31
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 1, Training BLEU score: 17.92
+epoch 1, Validation BLEU score: 15.30
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 2, Training Loss: 2.14
+epoch 2, Validation Loss: 2.27
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 3, Training Loss: 1.92
+epoch 3, Validation Loss: 2.27
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 4, Training Loss: 1.81
+  0%|          | 0/2108 [00:00<?, ?it/s]epoch 4, Validation Loss: 2.29
+
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 4, Training BLEU score: 24.33
+epoch 4, Validation BLEU score: 15.67
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 5, Training Loss: 1.72
+epoch 5, Validation Loss: 2.29
+
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 6, Training Loss: 1.63
+epoch 6, Validation Loss: 2.31
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 7, Training Loss: 1.55
+epoch 7, Validation Loss: 2.33
+  0%|          | 0/262 [00:00<?, ?it/s]epoch 8, Training Loss: 1.48
+  0%|          | 0/2108 [00:00<?, ?it/s]epoch 8, Validation Loss: 2.35
+epoch 8, Training BLEU score: 30.64
+epoch 8, Validation BLEU score: 15.40
+
+5e-5:
+
+
+  0%|          | 0/262 [00:00<?, ?it/s]Before training, Validation Loss: 2.35
