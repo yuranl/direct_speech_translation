@@ -8,3 +8,6 @@ sacrebleu
 accelerate
 tqdm
 sentencepiece
+pydub
+googletrans
+speechrecognition

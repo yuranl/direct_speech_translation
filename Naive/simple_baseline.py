@@ -1,10 +1,7 @@
 import speech_recognition as sr
 from googletrans import Translator
 from pydub import AudioSegment
-from gtts import gTTS
 import os
-
-
 
 r = sr.Recognizer()
 
