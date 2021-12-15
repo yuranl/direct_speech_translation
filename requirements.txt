@@ -11,3 +11,4 @@ sentencepiece
 pydub
 googletrans
 speechrecognition
+google_cloud_trans
