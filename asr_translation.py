@@ -18,19 +18,24 @@ import torch
 import torch.nn as nn
 import numpy as np
 import math
+import torch.optim as optim
 
 class asr_translation_model(nn.Module):
     def __init__(self):
         super(asr_translation_model, self).__init__()
         self.asr_model = Wav2Vec2ForCTC.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
-        self.conv1 = nn.Conv1d(21128, 1, 1, 10,bias=True)
+        self.conv1 = nn.Conv1d(21128, 512, 5, 5,bias=True)
         self.relu = nn.ReLU()
-        self.conv2 = nn.Conv1d(1, 512, 1, bias=True)
+        # self.conv2 = nn.Conv1d(1, 512, 1, bias=True)
         self.translation_model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
 
     def forward(self, batch):
+        del batch['input_ids']
+        del batch['attention_mask']
         logits = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
-        translation_input = self.conv2(self.relu(self.conv1(logits.transpose(1, 2))))
+        # translation_input = self.conv2(self.relu(self.conv1(logits.transpose(1, 2))))
+        translation_input = self.conv1(logits.transpose(1, 2))
+        translation_input = self.relu(translation_input)
         length = translation_input.shape[2]
         batch_size = translation_input.shape[0]
         new_attention_mask = torch.ones(batch_size,length, device=translation_input.device)
@@ -38,8 +43,11 @@ class asr_translation_model(nn.Module):
         return outputs
 
     def generate(self, batch, max_length=512):
+        del batch['input_ids']
+        del batch['attention_mask']
         logits = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
-        translation_input = self.conv(logits.transpose(1, 2))
+        translation_input = self.conv1(logits.transpose(1, 2))
+        translation_input = self.relu(translation_input)
         length = translation_input.shape[2]
         batch_size = translation_input.shape[0]
         new_attention_mask = torch.ones(batch_size,length, device=translation_input.device)
@@ -48,7 +56,7 @@ class asr_translation_model(nn.Module):
         return generated_tokens
 
 
-split_datasets  = load_dataset('json', data_files={'train': './transcription_translation/4.json', 'validation': './translation_validation/102371.json'})
+split_datasets  = load_dataset('json', data_files={'train': './transcription_translation/6.json', 'validation': './translation_validation/102371.json'})
 # DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 processor = Wav2Vec2Processor.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
 
@@ -73,11 +81,11 @@ def postprocess(predictions, labels):
     return decoded_preds, decoded_labels
 
 def preprocess_function(examples):
-    # inputs = [ex for ex in examples["transcript"]]
+    inputs = [ex for ex in examples["transcript"]]
     targets = [ex for ex in examples["translation"]]
 
-    # model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
-    model_inputs = {}
+    model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
+    # model_inputs = {}
     # Set up the tokenizer for targets
     with tokenizer.as_target_tokenizer():
         labels = tokenizer(targets, max_length=max_target_length, truncation=True)
@@ -85,7 +93,7 @@ def preprocess_function(examples):
     model_inputs["labels"] = labels["input_ids"]
     wav_files = [ex for ex in examples["wav_id"]]
     wav_offset = [ex for ex in examples["offset"]]
-    wav_duration = [ex for ex in examples["duration"]]
+    wav_duration = [ex if float(ex) > 0.400 else "0.400" for ex in examples["duration"]]
     wav_files_unique = list(set(wav_files))
     wav_dic = {}
     for i in range(len(wav_files_unique)):
@@ -125,7 +133,7 @@ def pretrained_performance():
         with torch.no_grad():
             generated_tokens = accelerator.unwrap_model(model).generate(
                 batch,
-                max_length=512,
+                max_length=256,
             )
         labels = batch["labels"]
 
@@ -154,13 +162,13 @@ for wdecay in [0.0002]:
     processor = Wav2Vec2Processor.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
     # asr_model = Wav2Vec2ForCTC.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
 
-    # data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
+    data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
     # translation = pipeline("translation_chinese_to_english", model=model, tokenizer=tokenizer)
     # text = "我不知道我在干嘛, 这句话是用来测试的"
     # translated_text = translation(text, max_length=40)[0]['translation_text']
     # print(translated_text)
-    max_input_length = 64
-    max_target_length = 64
+    max_input_length = 128
+    max_target_length = 128
 
     tokenized_datasets = split_datasets.map(
         preprocess_function,
@@ -169,20 +177,21 @@ for wdecay in [0.0002]:
     )
     train_dataloader = DataLoader(
         tokenized_datasets["train"],
-        shuffle=True,
-        # collate_fn=data_collator,
+        shuffle=False,
+        collate_fn=data_collator,
         batch_size=1,
     )
     eval_dataloader = DataLoader(
         tokenized_datasets["validation"], 
-        # collate_fn=data_collator, 
+        collate_fn=data_collator, 
         batch_size=1
     )
 
 
 
     print("weight decay: " + str(wdecay))
-    optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=wdecay)
+    # optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=wdecay)
+    optimizer = optim.SGD(model.parameters(), lr=2e-5)
     accelerator = Accelerator()
     model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
         model, optimizer, train_dataloader, eval_dataloader
@@ -191,7 +200,8 @@ for wdecay in [0.0002]:
     #metric = BLEU
 
     num_train_epochs = 8
-    num_update_steps_per_epoch = len(train_dataloader)
+    accum_iter = 16
+    num_update_steps_per_epoch = math.ceil(len(train_dataloader) / accum_iter)
     num_training_steps = num_train_epochs * num_update_steps_per_epoch
 
     lr_scheduler = get_scheduler(
@@ -216,29 +226,49 @@ for wdecay in [0.0002]:
     # print(wu_scheduler)
 
     # pretrained_performance()
+    
     progress_bar = tqdm(range(num_training_steps))
     loss_train = []
     loss_eval = []
+    for param in model.asr_model.parameters():
+        param.requires_grad = False
+    for param in model.translation_model.parameters():
+        param.requires_grad = False
+
+    # scaler = torch.cuda.amp.GradScaler()
+
     for epoch in range(num_train_epochs):
         # Training
         model.train()
         loss_cumu = 0
 
         i = 0
-        for batch in train_dataloader:
-            outputs = model(batch)
-            loss = outputs.loss
-            accelerator.backward(loss)
+        
+        for batch_idx, batch in enumerate(train_dataloader):
+            with torch.set_grad_enabled(True):
+                outputs = model(batch)
+                # with torch.cuda.amp.autocast():
+                loss = outputs.loss
 
-            optimizer.step()
+                # accelerator.backward(scaler.scale(loss))
+                # scaler.step(optimizer)
+                # scaler.update()
+                loss = loss / accum_iter
+                accelerator.backward(loss)
+
+                if ((batch_idx + 1) % accum_iter == 0) or (batch_idx + 1 == len(train_dataloader)):
+                    optimizer.step()
+                    optimizer.zero_grad()
+                    cosine_scheduler.step()
+                    progress_bar.update(1)
+                    i += 1
+            
             # lr_scheduler.step()
             # wu_scheduler.step()
-            cosine_scheduler.step()
-            optimizer.zero_grad()
-            progress_bar.update(1)
 
-            i += 1
-            loss_cumu += float(loss.item())
+
+                
+                loss_cumu += float(loss.item())
 
         loss_cumu /= i
         loss_train.append(loss_cumu)
@@ -270,7 +300,7 @@ for wdecay in [0.0002]:
                 with torch.no_grad():
                     generated_tokens = accelerator.unwrap_model(model).generate(
                         batch,
-                        max_length=512,
+                        max_length=256,
                     )
                 labels = batch["labels"]
 
@@ -295,7 +325,7 @@ for wdecay in [0.0002]:
                 with torch.no_grad():
                     generated_tokens = accelerator.unwrap_model(model).generate(
                         batch,
-                        max_length=512,
+                        max_length=256,
                     )
                 labels = batch["labels"]
 
@@ -323,9 +353,10 @@ for wdecay in [0.0002]:
             accelerator.wait_for_everyone()
             unwrapped_model = accelerator.unwrap_model(model)
             output_dir = "finetuned_model/" + str(epoch + 1)
-            unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
-            if accelerator.is_main_process:
-                tokenizer.save_pretrained(output_dir)
+            torch.save(model.state_dict(), output_dir)
+            # unwrapped_model.translation.save_pretrained(output_dir, save_function=accelerator.save)
+            # if accelerator.is_main_process:
+            #     tokenizer.save_pretrained(output_dir)
 
 print(loss_train)
 # [2.282253554751796, 2.05841838108973, 1.9250032483287283, 1.8195626936160183, 1.733216897190409, 1.6580969759985889, 1.591225100903855, 1.5336571980755516, 1.4812494712604292,1.435242395784416,
