@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 # data
-data
 data_source/
 MT_data/
 #transcription_translation/
