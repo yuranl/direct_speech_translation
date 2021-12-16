@@ -11,4 +11,4 @@ sentencepiece
 pydub
 googletrans
 speechrecognition
-google_cloud_trans
+google_cloud_translate==2.0.1
