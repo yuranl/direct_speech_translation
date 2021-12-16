@@ -1,0 +1,142 @@
+{"translation": "Hello!"}
+{"translation": "Welcome to our UNIT dialogue system advanced course."}
+{"translation": "I'm a research and development engineer from the 100-degree UNIT platform."}
+{"translation": "This session will introduce DM Kit, the open-source dialogue management framework of UNIT."}
+{"translation": "Let us first look at the overall structure of the system of dialogue."}
+{"translation": "In general, we can break down the mission-based dialogue system into three modules: dialogue understanding, dialogue management, resource retrieval and task implementation."}
+{"translation": "As an example, users of the reservation hotel's dialogue system have entered the phrase \u201cHelp me to book today's plaque in Beijing, like the one at the house of the land store\u201d."}
+{"translation": "The dialogue understanding module has received such a natural language input and processing, the corresponding intent and the vocabulary of the sentence."}
+{"translation": "The intention here is to book a hotel, and the word slot includes a hotel, a room type and time."}
+{"translation": "This intent and vocabulary will be used as input for our follow-up dialogue management module."}
+{"translation": "The dialogue management module will be implemented by selecting the corresponding actions in the context of the current state of dialogue, based on the intended input and the word chute."}
+{"translation": "For example, hotel reservations can now be initiated based on the intention of the hotel booking and the hotel, room type, time slot dialogue management module."}
+{"translation": "This leads to the selection of hotel booking actions and guides follow-on resource retrieval to the operation of the task execution module."}
+{"translation": "External hotel booking services are called, hotel bookings are completed and the booking results are fed back to users in natural languages."}
+{"translation": "We have thus completed a round of interactive dialogue."}
+{"translation": "Well, what kind of framework does such a dialogue system structure correspond to UNIT?"}
+{"translation": "Similar to the previous decomposition of the dialogue system, we can simply dismantle the UNIT system framework into two parts."}
+{"translation": "One is the cloudy dialogue understanding service."}
+{"translation": "It is responsible for the input of natural languages into the phrasing of the intent of the dialogue and the verbs."}
+{"translation": "Another component is the dialogue management and resource retrieval and task implementation modules."}
+{"translation": "This part of UNIT provides two ways for developers to choose to achieve it."}
+{"translation": "The first option is for developers to achieve simple dialogue responses through the configuration of voice-change responses on cloud platforms."}
+{"translation": "The second option is the DM Kit offline dialogue management framework that we will focus on in this lesson."}
+{"translation": "Through the use of DM Kit, developers can achieve more complex dialogue process management and task implementation."}
+{"translation": "This will be followed by a presentation on the design and use of DM Kit."}
+{"translation": "First, let's look at the dialogue in DM Kit in the abstract."}
+{"translation": "In DM Kit, there are two main concepts to the dialogue, namely, the status of the dialogue and policy."}
+{"translation": "The status of the dialogue indicates the status of the current user-system dialogue."}
+{"translation": "And policy can be understood to deal with the logic module for the most basic dialogue."}
+{"translation": "For each round of requests for dialogue, DM Kit receives the user's input into the natural language, visits the cloud dialogue understanding service, and interprets the natural language as the intent of the dialogue and the vocabulary."}
+{"translation": "On the basis of the intent obtained, combined with the vocabulary, with the current state of dialogue, DM Kit may choose the corresponding policy for implementation."}
+{"translation": "If we assume, for example, that we have chosen Policy A here, DM Kit will implement the logic of dialogue described by Policy A."}
+{"translation": "External services or a knowledge base may be accessed during the processing process to obtain data and to generate a voice or command as the ultimate skill response to the system."}
+{"translation": "At the same time, with the completion of the implementation of the policy A, DM Kit will update the current state of dialogue to the state of dialogue designated by the policy A, such as the dialogue status 2 here, in order to achieve a jump-over update of the state of dialogue."}
+{"translation": "And here's what we're going to say about the concept of policy in DM Kit."}
+{"translation": "Polity is the most basic module in DM Kit dealing with the logic of dialogue."}
+{"translation": "It defines the complete behaviour of skills in a given state of dialogue."}
+{"translation": "A policy includes three parts, namely, trigger conditions, operational parameters and the content of the responses."}
+{"translation": "Here's an example of a dialogue in a hotel reservation to look at these three parts."}
+{"translation": "The first is the triggering condition."}
+{"translation": "The trigger conditions for policy define the conditions under which this policy will be chosen."}
+{"translation": "Here, for example, we have defined a policy trigger, which is intended as a hotel reservation, a slot for hotels, rooms and times, with a status 001."}
+{"translation": "So, when the dialogue system is in 001, the user typed out the phrase \u201cto make a reservation for today's Beijing as a landmark at the land store\u201d."}
+{"translation": "Through our natural language understanding of the service, we have been able to interpret the intention to book hotels and to include three words slots: hotel, room type and time."}
+{"translation": "So the policy that defines this trigger is going to be selected for execution."}
+{"translation": "The second component of Policy is operational parameters."}
+{"translation": "It defines the parameters to be used in the logical processing of this dialogue."}
+{"translation": "The parameters here may be the word slot value or the result of the function execution."}
+{"translation": "Here the developers can define the logic of dialogue processing, the acquisition of parameters, access to external services or executive functions, and the data required for our dialogue response."}
+{"translation": "For example, we have defined three variables, one for a hotel, the other for a room, the other for time."}
+{"translation": "Finally, a variable of a function type is defined."}
+{"translation": "This function makes hotel reservations based on the first three variables and then assigns value to this variable to the intended result."}
+{"translation": "The last part of Policy is the output definition."}
+{"translation": "Each output of policy consists of three parts."}
+{"translation": "The first part is conditionalities."}
+{"translation": "Specifies the conditions to be met by using the current output."}
+{"translation": "The second part is the outcome of the dialogue."}
+{"translation": "It can be filled to the template using the business parameters that we have previously defined, and it can generate a voice return."}
+{"translation": "The third part is state update."}
+{"translation": "It designates a new state of dialogue that our system should enter after this policy process has been completed."}
+{"translation": "At the same time, it can also preserve parameters for subsequent rounds of use."}
+{"translation": "In this example of dialogue, we first judge whether the hotel booking results are one, that is, whether the bookings are successful or not."}
+{"translation": "If intended to succeed, then return the corresponding typhus and specify that the current state of dialogue needs to be updated to 003."}
+{"translation": "Okay, we've just described how individual policy is defined."}
+{"translation": "So how does policy work in DM Kit's actual operation?"}
+{"translation": "Let's take a look at DM Kit's service structure."}
+{"translation": "At the heart of DM Kit is a dialogue management engine."}
+{"translation": "On this engine, every skills dialogue process is defined by a json document, which actually includes a series of policy."}
+{"translation": "During the operation of DM Kit, each request first visits the cloud's configured skills to obtain the resolution results."}
+{"translation": "Then, on the basis of the skills ID and the results of the analysis, DM Kit found the corresponding policy in the matching skills json file."}
+{"translation": "In addition, the parameters of the function type can be defined in the policy that we described earlier."}
+{"translation": "The function here needs to be defined and realized in DM Kit."}
+{"translation": "DM Kit contains a number of commonly used functions as shared functions, including the operation of requesting external services to interpret data."}
+{"translation": "All skills are directly accessible."}
+{"translation": "At the same time, developers can also customize functions and call according to actual business needs."}
+{"translation": "Here is a detailed description of the configuration of DM Kit and how it is used."}
+{"translation": "DM Kit's code is open and hosted on GitHub."}
+{"translation": "In practice, the developers are configured to achieve most of the dialogue process management."}
+{"translation": "DM Kit's configuration files are all under the code conf directory."}
+{"translation": "From the top to the bottom, the first document is bot_tokens.json."}
+{"translation": "Developers can register the api key and secret key matching cloud skills in this file."}
+{"translation": "So you don't have to bring access to DM Kit when you ask for it."}
+{"translation": "Under the demo directory are the policy profiles of the two demo scenes that we provide."}
+{"translation": "The json files for each scene are the policy configuration that DM Kit actually loads."}
+{"translation": "The xml document will be introduced later."}
+{"translation": "Products.json documents are used for registration skills and for their corresponding policy profiles."}
+{"translation": "Each skill requires that the corresponding skill ID and policy file paths be registered in this document, so that it can be properly loaded at the time of actual access."}
+{"translation": "The remote_services_json file is used to configure the external service addresses required for the DM Kit service, including the UNIT cloud and third-party service addresses, and requires registration in this document in order to be properly accessed."}
+{"translation": "The last gflag.conf files are mainly designed to configure the DM Kit service port, the request path and the number of simultaneous distributions."}
+{"translation": "As a general rule, no change is required."}
+{"translation": "The core of the DM Kit configuration is the configuration of policy."}
+{"translation": "Each skill requires the configuration of a json file, which includes a series of arrays of policy."}
+{"translation": "The syntax of the configuration of each policy element in the array is governed by the DM Kit definition."}
+{"translation": "It mainly includes the trigger conditions, operational parameters and three parts of the output definition that we described earlier."}
+{"translation": "Here we have a list of the main field descriptions."}
+{"translation": "More information can be found on our official GitHub, for detailed documentation."}
+{"translation": "A skills-based capacity for dialogue management can be achieved through the development of a policy profile based on the logic of actual dialogue."}
+{"translation": "For some dialogue logics that require special processing or access to external services, this can be achieved by defining parameters of function type."}
+{"translation": "After editing the skill profile, we also need to register this document and its corresponding skill ID in the profile of products.json."}
+{"translation": "The developer can also register the skill api key and secret key in the configuration file bot_tokens."}
+{"translation": "This allows DM Kit to automatically access to token when communicating with the cloud, and the user does not need to upload token again when requesting DM Kit."}
+{"translation": "Okay, so what are we gonna do to test the impact of this skill when we're done with the pre-editing of the policy file?"}
+{"translation": "First, we need to download DM Kit's code from GitHub and complete the compilation."}
+{"translation": "Replace the configuration file under the compiled output directory with the configuration file that was pre-edited for us after completion of the compilation, and then run DM Kit."}
+{"translation": "DM Kit's service configuration is modified by the gflag file under theconf directory, which contains the port and path of the service request."}
+{"translation": "Normally, we can use the default configuration."}
+{"translation": "When DM Kit runs, we can test the dialogue by accessing the DM Kit service interface."}
+{"translation": "DM Kit's interface protocol is compatible with the dialogue interface protocol of UNIT 2.0."}
+{"translation": "The developers will be able to assemble json data according to the protocol and have regular access to DM Kit services."}
+{"translation": "In addition, we have provided Python scripts, which users can use to simulate and interact with local DM Kit services."}
+{"translation": "The premise of our operations, of course, is that the skills of the UNIT cloud are well-trained and functional."}
+{"translation": "Let's end with a visualization configuration tool for DM Kit."}
+{"translation": "We described earlier how the policy is configured to manage the dialogue process."}
+{"translation": "DM Kit supports the editorial design of the dialogue process through visualization tools in response to the multiplicity and complexity of dialogue."}
+{"translation": "The visualization tool here we use open-source mxgraph, specifically covering the following four steps."}
+{"translation": "As a first step, we edit the dialogue process on the Draw.io website in accordance with predefined editorial rules."}
+{"translation": "After step two edits the dialogue process, we export the dialogue flow chart to the xml file under the DM Kit configuration directory."}
+{"translation": "We've seen the xml file of the demo scene, which we've been able to edit through this tool."}
+{"translation": "Step three generates the json profile."}
+{"translation": "DM Kit provided a conversion script."}
+{"translation": "The developers run the langage_complier program under the run.py directory, which converts the xml file to the corresponding json file."}
+{"translation": "Finally, the registration of this json file and the corresponding skill ID, following the same process as the previous one, will make it possible to run DM Kit loading and execution."}
+{"translation": "We need to follow certain editorial rules when visualizing the dialogue process."}
+{"translation": "This editorial rule is really very simple, and we've defined the following building blocks."}
+{"translation": "The first is a single arrow line."}
+{"translation": "It's used to connect other elements, to indicate the jump of the state."}
+{"translation": "The second element is ellipse."}
+{"translation": "Indicates the user node, which is used to store the user's dialogue intentions and the vocabulary."}
+{"translation": "Corresponding to the preceding policy syntax is actually the trigger for policy."}
+{"translation": "The third is a rounded rectangle."}
+{"translation": "It is used to indicate BOT nodes in which parameters and BOT responses can be defined."}
+{"translation": "The syntax corresponding to policy is actually policy's business parameters and output."}
+{"translation": "The last one is a diamond."}
+{"translation": "used to express a condition judgement."}
+{"translation": "Enter a different output node when different conditions are met."}
+{"translation": "Corresponding to the policy syntax is actually a condition limit in the output definition."}
+{"translation": "Using several of the building blocks above, we can edit a complete flow chart of the dialogue."}
+{"translation": "This, for example, is the complete flow chart of the hotel reservations that we described in the previous section."}
+{"translation": "A detailed set of steps for this example can be drawn from the curriculum in chapter III above."}
+{"translation": "Okay."}
+{"translation": "This is all the content of this lesson."}
+{"translation": "Thank you!"}

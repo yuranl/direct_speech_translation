@@ -1,0 +1,142 @@
+{"translation": "Hello everyone"}
+{"translation": "Welcome everyone to pay attention to our Unit Degradation System Advanced Course"}
+{"translation": "I am the R&amp;D engineer of Baidu Music Platform."}
+{"translation": "This lesson will introduce you to mcat, which is a bit open source for dialogue management."}
+{"translation": "First, let\u2019s take a look at the overall structure of the dialogue system"}
+{"translation": "Generally speaking, we can decompose the task-based dialogue system into three modules: dialogue understanding, dialogue management, resource retrieval, task execution"}
+{"translation": "In the dialog system of the hotel reservation, the user entered the standard room meeting for me to help me book today\u2019s Beijing Home Inn Shangdi store."}
+{"translation": "The dialogue comprehension module received such a natural language input and processed it to figure out that the intent corresponding to this sentence has been resigned"}
+{"translation": "This intention text includes the hotel room type and time when booking a hotel"}
+{"translation": "This intention and red tide will be used as input to our subsequent dialogue management module"}
+{"translation": "The dialogue management module selects the corresponding action to execute according to the input one end and the locomotive check combined with the current dialogue state"}
+{"translation": "For example, according to the intention of booking a hotel and the time of the hotel room, these words collide with the dialogue management module. Now you can start the hotel reservation."}
+{"translation": "Thereby selecting the action of booking a hotel to guide the subsequent resource retrieval as the task execution module to run the corresponding operation"}
+{"translation": "Call the external service of the reserved hotel to complete the hotel reservation and feedback the reservation result to the user in the form of natural language"}
+{"translation": "So we have completed a round of dialogue interaction"}
+{"translation": "Okay, what kind of framework does such a dialogue system architecture correspond to INS?"}
+{"translation": "Similar to the previous dialogue system, the system framework that we can have is simply disassembled into two parts"}
+{"translation": "One is the original dialogue understanding service"}
+{"translation": "He is responsible for parsing natural language input into dialogue intent and has resigned"}
+{"translation": "The other part is the dialogue management and support reduction task execution module"}
+{"translation": "This part is because you provide two ways for developers to choose to implement"}
+{"translation": "The first option is that developers can implement simple dialogue responses by drawing responses on the cloud platform configuration"}
+{"translation": "This choice is the offline dialogue management framework of dmp that we will mainly introduce in this lesson."}
+{"translation": "Through the use of the developers of Dimple, more complex dialogue process management and task execution can be realized"}
+{"translation": "Later, we will introduce the design principle and usage of bmpde."}
+{"translation": "First, let\u2019s take a look at the dialogue abstraction in Dianpei\u2019s"}
+{"translation": "There are two main concepts in Dianpei\u2019s dialogue in China, namely dialogue state and policy."}
+{"translation": "The dialogue state indicates the state of the current user&#39;s dialogue with the system"}
+{"translation": "Policy can be understood as the most basic logical unit of dialogue processing"}
+{"translation": "For each round of dialogue request dmp receives the user&#39;s natural language input to access the cloud dialogue understanding service to parse natural language into dialogue intentions."}
+{"translation": "According to the obtained intention and word direction at the same time combined with the current dialogue state of MK, the corresponding Polo water can be selected for execution"}
+{"translation": "For example, when we say that the policy a selected here, the dialogue processing logic described by the policy will be executed."}
+{"translation": "In the process of processing, you may access external services or knowledge bases to obtain data and generate picture books or instructions as the final skill response of the system"}
+{"translation": "At the same time, after the execution of the policy is completed, Dianpei will update the current dialogue state to the dialogue state specified by the crack lock, such as the dialogue state here, so as to realize the jump update of the dialogue state."}
+{"translation": "Below we mainly introduce the concept of soaking water in Dianchi Lake"}
+{"translation": "This is the most basic unit of dlp&#39;s installation processing dialogue logic"}
+{"translation": "It defines the complete behavior in a specific conversation state"}
+{"translation": "A crack includes three parts: trigger condition, business parameter and open content"}
+{"translation": "Let\u2019s take a look at these three parts based on the conversation history of the hotel reservation."}
+{"translation": "The first is the trigger condition"}
+{"translation": "This trigger condition defines the conditions under which this policy will be selected"}
+{"translation": "For example, here we define a Polo water departure condition. Its intent is to book a hotel, the market is the hotel room type and the time it is 001"}
+{"translation": "Then when the dialogue system is in a downturn, the user input helps me to book the label of the Beijing Home Inn Shangdi store today."}
+{"translation": "We analyze the intention of booking a hotel through natural language understanding services and include the three words of hotel room type and time."}
+{"translation": "Then the soaking water that defines this trigger condition will choose to execute"}
+{"translation": "Except for this article, the second part is business parameters"}
+{"translation": "It defines the parameters that need to be used in the logical processing of this dialog"}
+{"translation": "The parameters here can be super value or the result of function execution"}
+{"translation": "Developers can define dialogue processing logic here to obtain parameters to access external services or execute functions to obtain the data needed for our dialogue reply"}
+{"translation": "For example, in this example, we define three variables to obtain the hotel room type time 324 Cao Zhi"}
+{"translation": "Finally, a variable of function type is defined"}
+{"translation": "This function makes hotel reservations based on the first three variables and then assigns the results of the reservation to these variables"}
+{"translation": "The last part of holistic is the initial definition"}
+{"translation": "The output of each gun now includes three parts"}
+{"translation": "The first part is conditional restrictions"}
+{"translation": "Specify the conditions that need to be met to use the current output"}
+{"translation": "Part 2 is the result of the dialogue response"}
+{"translation": "It can use the template of the business parameter variety that we defined earlier to generate the number return"}
+{"translation": "The third part is the status update"}
+{"translation": "It specifies a new session state that our system should enter after the policy processing ends"}
+{"translation": "At the same time, Taipei saves some parameters and provides subsequent wheels for use"}
+{"translation": "In this dialogue example, we first judge whether the result of booking a hotel is 1, that is, whether the booking is successful"}
+{"translation": "If the reservation is successful, return the corresponding Huashu and specify that the current dialogue status needs to be updated to 003"}
+{"translation": "Okay, just now we introduced how a single policy is defined"}
+{"translation": "How did the water leak in Martell&#39;s actual operation come from the zodiac?"}
+{"translation": "Let&#39;s take a look at the mp and service architecture"}
+{"translation": "The core of Tiance is a dialogue management engine"}
+{"translation": "The dialog flow of each skill on this engine is defined by a cone leftover file. This default file actually includes a series of policies."}
+{"translation": "During the operation of Dimple, each request will first access the skills configured in the cloud to obtain the analysis results"}
+{"translation": "Then according to the process ID and the mp of the analysis result, find the corresponding bubble water in the file of the corresponding skill and execute it."}
+{"translation": "In addition, we introduced earlier that the parameters of the function type can be defined in Hou Le Shui"}
+{"translation": "The function here needs to be defined and implemented in the program"}
+{"translation": "Dianpei has built-in some commonly used functions as shared functions, including the operation of requesting external services to parse data"}
+{"translation": "All skills can be called directly"}
+{"translation": "At the same time, developers can also implement destined functions and call them according to actual business needs"}
+{"translation": "Below we introduce in detail the configuration structure and usage method of the subversive land"}
+{"translation": "The code of Dianchi is open source and hosted on github"}
+{"translation": "In actual use, developers can realize most of the dialogue process management through configuration"}
+{"translation": "The configuration files of gmp are all in the conf directory of the code"}
+{"translation": "A file viewed from top to bottom is high talking 7 o\u2019clock spawned"}
+{"translation": "Developers can put the API key and Secret key corresponding to the cloud skills in this file"}
+{"translation": "In this way, you don&#39;t need to bring token when requesting dmp"}
+{"translation": "The demo is the Polo water configuration file of the two login scenarios we provided"}
+{"translation": "Each scene corresponds to the policy configuration where the file is actually loaded by tmp"}
+{"translation": "The file will be introduced later"}
+{"translation": "The presentation file is used to design the corresponding crack configuration file"}
+{"translation": "Each skill needs to be cracked when the corresponding skill ID and policy file path are actually accessed in this file in order to be loaded and executed correctly"}
+{"translation": "The remote services push file is used to configure the external service address that the DNS service needs to access, including because the original address and the third party service address need to be registered in this file to be accessed normally"}
+{"translation": "The last france.com file is mainly to configure the service port request path of DNS and the setting of the number of concurrency."}
+{"translation": "No need to change under normal circumstances"}
+{"translation": "The core of the configuration of point P is the configuration of policy"}
+{"translation": "Each skill needs to be configured with a cone leftover file. The default file includes a series of arrays composed of lavish"}
+{"translation": "The configuration syntax of each characteristic element in the array needs to follow the arduous definition of the specification"}
+{"translation": "It mainly includes the third part of the trigger condition business warehousing that we introduced earlier has entered"}
+{"translation": "Here we list the main field descriptions"}
+{"translation": "Zhengzhou&#39;s introduction, you can log in to our official Haben reference detailed documentation"}
+{"translation": "Developers can realize a skill planning and management ability by writing characteristic configurations according to the actual dialogue logic"}
+{"translation": "For some dialog logic that requires special processing or access to external services, it can be implemented by defining the parameters of the function type"}
+{"translation": "After editing Wang Jing\u2019s cracked file, we also need to register this file and the corresponding process ID in the configuration file of Runway Danger."}
+{"translation": "In addition, developers can add the API key and Secret QQ car of the skill to the configuration file of buttocks"}
+{"translation": "In this way, the Dianpei cloud area will automatically obtain access_token when communicating"}
+{"translation": "After the previously edited crack file and registration is completed, how do we test the effect of this skill?"}
+{"translation": "First of all, we need to download the code of Dianpei from bottom to top and complete the compilation"}
+{"translation": "And after the completion, replace the configuration file in the one-page betting directory of the screen with the configuration file we edited and run before, and then you can run the monitor Peter"}
+{"translation": "The service in Yantai began to be modified through the partial file that is not as follows. This file configuration includes the port and path of the service request."}
+{"translation": "In general, we can use the default configuration"}
+{"translation": "After Tianpu is running, we can access the service interface of Dianpei to test the dialogue."}
+{"translation": "The interface protocol of the TV is compatible with the dialogue interface protocol of Voice Tuning 2.0"}
+{"translation": "Developers can access the nk service normally after assembling non-parameter data according to the company"}
+{"translation": "In addition, we also provide a Python script that users can run this script to simulate and interact with the local arranged service."}
+{"translation": "Of course, the premise of our operations is that we have the original skills that have been trained and can operate normally."}
+{"translation": "Finally, let&#39;s introduce the visual configuration tool of Dianfang"}
+{"translation": "Earlier we introduced how to shoot this head to understand the management of the dialogue process"}
+{"translation": "Editing and designing the planning process through visual tools based on the state of the complex dialogue"}
+{"translation": "For the visualization tool here, we use the open source Nga to link up and include the following four steps"}
+{"translation": "The first step is to edit the dialog flow in accordance with the pre-defined editing rules on the .lt website"}
+{"translation": "After editing the dialogue process of the telegram, we export the dialogue flow chart as an xml file and place it in the configuration directory of tmp like"}
+{"translation": "Earlier we saw that the xml file of the demo scene was edited and exported through this tool"}
+{"translation": "Step 3 Generate verification configuration file"}
+{"translation": "amc provides a conversion script"}
+{"translation": "Developers run the more expensive compiler directory to make dot py program. This program will convert the xml file into the corresponding push file"}
+{"translation": "Finally, follow the same process as the previous one to register the file and the corresponding skill ID to load and execute the mpa that can be run."}
+{"translation": "When visualizing the editing dialogue process, we need to follow certain editing rules"}
+{"translation": "This wargame rule is actually very simple. We define the following composition elements"}
+{"translation": "The first is the single arrow connection"}
+{"translation": "It is used to connect other elements to indicate state jump"}
+{"translation": "The second element is an ellipse"}
+{"translation": "If the user experience it is used to store the user\u2019s dialogue intention and resignation"}
+{"translation": "The cracked version pushed to the front is actually the trigger condition of the policy"}
+{"translation": "The third one is a rounded rectangle"}
+{"translation": "It is used to indicate that parameters and responses can be defined in multiple nodes"}
+{"translation": "The most difficult to crack grammar shows the cracked business parameters and output"}
+{"translation": "The last one is Lingxi"}
+{"translation": "Indicates conditional judgment"}
+{"translation": "But when different drop conditions are met, different output decisions are entered"}
+{"translation": "To crack the law means that there is another conditional restriction"}
+{"translation": "Using the above several composition elements, we can edit a complete dialogue flow chart"}
+{"translation": "For example, this is the complete planning flowchart for hotel reservations that we introduced in the previous chapter"}
+{"translation": "For the detailed key steps of this history, you can refer to the course content of the previous third."}
+{"translation": "OK"}
+{"translation": "The above is all the content of this lesson"}
+{"translation": "thank you all"}

@@ -1,0 +1,222 @@
+{"translation": "Hello!"}
+{"translation": "Uh, I'm going to introduce you to OLAP practice today."}
+{"translation": "It's a 100-degree product of PALO."}
+{"translation": "And, uh, the subject of the catalogue that I'm introducing today will be divided into four main areas."}
+{"translation": "One is going to introduce us to the background of our OLAP 100 degrees."}
+{"translation": "There is also an analysis of the scenes that we are applying, as well as of several cases, so that you can make some reference when you use them."}
+{"translation": "Then there is a brief introduction to our collective structure and to some key features."}
+{"translation": "Well, first of all, let me introduce you to PALO."}
+{"translation": "Well, the reason why PALO's name is written upside down in OLAP is to form PALO."}
+{"translation": "Then PALO is an interactive MPP-based database that supports SQL search and SQL search."}
+{"translation": "And then it looks at a 100 TB to PB T level, then it's basically structured data, and then we support a millisecond-to-second response."}
+{"translation": "And then it's developed by the 100-degree data department, and, uh, it's also used extensively within the 100-degrees."}
+{"translation": "Then more than a thousand machines would have been deployed internally, and perhaps the largest operation would have been above 100 TB levels."}
+{"translation": "OK, so first of all, we'll all probably hear more about OLTP."}
+{"translation": "What's OLAP anyway?"}
+{"translation": "OLAP uh by name is called online number and analysis of a concept like a uh, uh, engine."}
+{"translation": "And then here's a table that makes a distinction between OLTP and OLAP."}
+{"translation": "You can, uh, look at it in detail."}
+{"translation": "Then, first of all, from an application-oriented perspective, OLTP is mainly dealing with some routine transactions, and then OLAP is looking at some queries, analysis of decision-making, and a slightly larger number of data."}
+{"translation": "And then the mode of access, and then O OLTP could be some batches of small queries, and then some OLAPs, some composite polymers, drills, drills."}
+{"translation": "Then, from the point of view of the amount of data, OLTP is generally a relatively small amount of data, and it is also, uh, a typical access to the latest data, but the amount of data that OLTP OLAP may visit is larger."}
+{"translation": "It then has multiple versions, because it has some historical data that need to be traced back and historical trends that need to be analysed."}
+{"translation": "Then, in terms of data updating and the organization of the data, OLTP is generally a real-time update."}
+{"translation": "And then, uh, it has some sort of organized form of data, mainly some of the paradigms in some database areas."}
+{"translation": "And then OLAP's probably, uh, mostly batch updates."}
+{"translation": "And then it's, uh, article-by-article update with very little demand."}
+{"translation": "And then some of its, uh, forms of data organization are mainly some of the models that include information, some of the famous analyses in the context of the scene."}
+{"translation": "Uh, the difference between Online and Offline is mostly about a response time."}
+{"translation": "Online may be more focused on responding quickly and in a timely manner, giving results first."}
+{"translation": "And then when Offline, for example, often uses some of Hadop's analytical tools, maybe it doesn't put that much emphasis on the time of the uh response."}
+{"translation": "Now let's look at some of the industry's commonly used OLAP systems."}
+{"translation": "There's something about, uh, a long time ago the OLAP system was just monopolized by some commercial companies."}
+{"translation": "Then, in recent years, with the development of big data technology, especially in the Hadop community, some open-source products have emerged."}
+{"translation": "And then there's some uh, we're on the cloud."}
+{"translation": "For example, there are some OLAP products on the clouds in Google and Amazon."}
+{"translation": "Well, PALO is a OLAP product."}
+{"translation": "And then it's based on some of its positioning, and here's some comparison, some of the positioning of PALO when we were designing it."}
+{"translation": "First, PALO is a low product, and then it can expand linearly."}
+{"translation": "Uh, support cloud deployment."}
+{"translation": "In fact, we PALO are actually actually online on the 100-degree open cloud, and if you're even some outside users, you can try it if you want to."}
+{"translation": "Well, there's the PALO that supports high utility, and then it's high performance, and it's designed to be at 100,000 QPS."}
+{"translation": "And one hundred Gs per second of scan should be the whole cluster and that level of magnitude."}
+{"translation": "And then we can import at the highest possible speed to an entire cluster of, uh, ten terabytes per hour."}
+{"translation": "OK, uh, after the background of PALO, let's talk about some of the U.S. scenes of PALO's, some of our cases within 100 degrees, some of our internal product lines, some of our typical cases, and you can look at them."}
+{"translation": "If you want to see if you have something like that, you can think about our PALO if you need it."}
+{"translation": "Well, it's basically some statistical analysis of the data."}
+{"translation": "And then, in detail, there might be two major larger scenarios."}
+{"translation": "One is the statement, and the other is our multidimensional analysis."}
+{"translation": "Well, what was our product line like before we had a PALO?"}
+{"translation": "For a statement, it may be, for example, to take an uh timed task and then run on time every day, and end up with the final result and then import it into MySQL."}
+{"translation": "Why is this the end result?"}
+{"translation": "Because MySQL is problematic when dealing with large amounts of data, there are a number of lax performance considerations that do not meet the requirements, and then it can only guide the final results."}
+{"translation": "And then there are some things that, uh, might end up getting results like this, and then, uh, go to the user and look for them, and then end up emailing them, or some other way to show them."}
+{"translation": "Yeah, but that's a problem."}
+{"translation": "It's good that you're on time duty, and if you're going to, uh, or if you're going to lead the final results to MySQL, you're going to have a lot of jobs and lots of tables in MySQL, which are very expensive to maintain."}
+{"translation": "And, uh, it's probably a lot of time that faith and efficiency don't meet the requirements."}
+{"translation": "This user will just do it."}
+{"translation": "And then the multidimensional analysis might be some of what we used to say about Hadop+Hive."}
+{"translation": "Uh, but if you're thinking about the statute of limitations, maybe you could come and think about our PALO."}
+{"translation": "Here's some examples of some of the 100-degree product lines using our PALO."}
+{"translation": "First of all, it's 100 degrees, and it's using our PALO in the presentation, uh."}
+{"translation": "This, uh, it's first and foremost what it's 100 degrees."}
+{"translation": "You should all probably know better."}
+{"translation": "Ah, it's a professional analytical tool for a professional website that we provide 100 times."}
+{"translation": "So, uh, what's it look like to use one of our scenes for, uh, a piece of it?"}
+{"translation": "Imported every five minutes, followed by more than 300 watches."}
+{"translation": "The maximum amount of data on a single day is probably more than one TB, and then the maximum QPS per second is 2,000."}
+{"translation": "And then before we moved from uh, other systems to PALO before we used PALO, there were over 220 machines before us to over 50 of them."}
+{"translation": "And then, uh, the average response time is 30 milliseconds from the 60 milliseconds before us to the 30 milliseconds after we move the PALO most."}
+{"translation": "And this page is actually a screenshot of PALO's, uh, a 100-degree report of one of their interfaces."}
+{"translation": "Well, what it means is that every day on the left side, it's got some PVs, some traffic analyses, some indicator dimensions."}
+{"translation": "And then you just switch and then every day you're going to, uh, produce these statements on a regular basis."}
+{"translation": "Next, one of our applications in the field of multidimensional analysis, is a 100-degree takeout."}
+{"translation": "100 degrees of takeout and, uh, it has a data platform inside it, using an engine from our PALO."}
+{"translation": "And then it's, uh, running schoolmates going to analyze orders, merchants, sales people, and stuff like that."}
+{"translation": "And then it's characteristic that my dimensions are custom-made."}
+{"translation": "That's what I am. Well, it's a typical scenario of a multi-dimensional analysis."}
+{"translation": "And then you customize, uh, the dimensions of you to uh it, and you specify the dimensions, and then you can produce the results of this analysis in real time and on time."}
+{"translation": "It's very helpful to make decisions about what's going on in their, uh, upper class."}
+{"translation": "Well, then the next one is an uh, thumpy, an internal data set of our thumps, and the bottom is useful for our PALO engine."}
+{"translation": "There's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it, there's more in it."}
+{"translation": "And then it turns us on before us, uh, from the minute level before us to the second level."}
+{"translation": "Here's some of the scenes that we've introduced to PALO, and some of the typical examples that we've used."}
+{"translation": "And what's down there, uh, if there's anyone in the class who needs it in the future, might consider if we could use our PALO."}
+{"translation": "Well, here's a brief description of some of the PALO's architecture and some of the key technical features."}
+{"translation": "So you can use us, and you can think about, uh, having some knowledge of us first, and making better use of us."}
+{"translation": "Well, first of all, the general structure of PALO, and for the upper-level users, we just need it to have experience with MySQL before we can simply use us, because we support MySQL's agreement."}
+{"translation": "So we split the insides of PALO into FE and BE two, uh, two layers."}
+{"translation": "And it's responsible for the metadata, for the analysis, for the analysis, and for the planning of these tasks."}
+{"translation": "And the bee is responsible for the distribution of data, our multiple copies, the execution of our specific queries, and, uh, some specific scans of the data, which are done in the ben."}
+{"translation": "What we're talking about here is that we have multiple FEs, and that's what we're thinking, first of all, that we support the high availability of metadata."}
+{"translation": "Any f between any more FEs."}
+{"translation": "Uh, we have a kind of RAFT agreement to achieve a high availability of metadata."}
+{"translation": "And the other thing is that when we're stressed, we've got a bottleneck in our performance, and we're able to grow horizontally linearly through a linear extension of the FE to raise our uh FE's this uh high-utility."}
+{"translation": "This is just a brief introduction to our structure."}
+{"translation": "If we have detailed technical details, we'll have a chance to communicate more in detail later."}
+{"translation": "And then, uh, then we're going to be brief about some of the characteristics of our PALO technology."}
+{"translation": "Ah, for users, we just need MySQL experience to use us, because we support MySQL."}
+{"translation": "Because supporting MySQL has a number of advantages."}
+{"translation": "The first is that the learning curve is very low for users."}
+{"translation": "And then we can be easily compatible with top-level applications, e.g. with JDBC in the user program, with OR ODBC to visit us, and we can be easily compatible."}
+{"translation": "To switch is to switch the cost of a user-to-user switch to a very low cost of switching from the original system to PALO."}
+{"translation": "And then it's possible that we're now easy to access some of the very, very common BI tools in the city's uh market, and then, like Tableau, Saiku, like Qlik, can be very, very easy to connect."}
+{"translation": "And then some of MySQL-related peripherals, we can all, uh, use them directly."}
+{"translation": "For the use of PALO, it is easy for a person with experience of using MySQL to use PALO after some uh support of MySQL."}
+{"translation": "The first line, you use MySQL to specify an uh machine port, and then the user, the password, can be connected to our PALO."}
+{"translation": "Of course the user is connected to MySQL on the client's side, but the backstage is our PALO, and the user doesn't think we're a poor MySQL server."}
+{"translation": "And then build the vault, uh, the statements are basically the same as MySQL."}
+{"translation": "Ah, and down there is a Load and, uh, our Load imported some of the imports of Show Load's uh, these queries."}
+{"translation": "And down at the bottom, there's a select uh SQL query, and, uh, these are basically the same as MySQL's."}
+{"translation": "Parallel databases, a large-scale database of OLAP non-uh-OLAP, we might first stress our high availability."}
+{"translation": "Uh, the first one might have mentioned a little bit before, that our metadata were between the FE and, uh, high-availability, kept by an agreement of the type RAFT, ah."}
+{"translation": "And what about the data? How do we make it work?"}
+{"translation": "The first is to say that we have a lot of copies, and then we still have the ability to automatically supplement and automatically balance between copies."}
+{"translation": "Here's a little bit of this metadata from our FE, uh, one of the metadata from the FE."}
+{"translation": "We will not go into detail about this."}
+{"translation": "Well, then, uh, we're going to introduce a very typical model of data in a PALO, which you have to be aware of when you use PALO."}
+{"translation": "Well, if we have a table like this, we have a list of Time, ID, country, then click and consume."}
+{"translation": "And then I'm in the PALO making a distinction between the Key and the Value columns."}
+{"translation": "The first three rows are a Key column, and the last two are a Value column."}
+{"translation": "And, uh, first of all, PA's bottom storage in all Key's PALO is in order, and this orderly benefit is that I'm able to physically and physically locate, and this dichotomy should be understood by all."}
+{"translation": "And then all Key's in PALO's internal storage is the only one."}
+{"translation": "If the Key column is the same as the Value column automatically aggregates the data imported in that multiple batches."}
+{"translation": "Key and Value columns, each Value column can mean, uh, that each Value column can specify a form of aggregation, and the same Value columns in Key columns automatically aggregate."}
+{"translation": "Well, then, uh, here's an example, for example, of a day-to-day data, where you import a batch every five minutes, and maybe more than two hundred and eighty times that day."}
+{"translation": "If it doesn't come together automatically, there's at least the same thing that Key has to produce at least two hundred and eighty data."}
+{"translation": "And when you analyze it, you're going to have to bring these two hundred and eighty pieces together in real time."}
+{"translation": "But inside the PALO, we'll have you two hundred and eighty in one piece by the time you import, so the speed at which you search the search will be very efficient."}
+{"translation": "A more detailed scenario, assuming that we have a Base table, is our basic data table, with three data in it."}
+{"translation": "And then we import another batch of data, and we import such a batch, we call Delta."}
+{"translation": "And then here's the incremental data."}
+{"translation": "It's the same as the previous Key will merge and the different Keys will add."}
+{"translation": "And then that leads to the creation of this result, which would contain four pieces of data."}
+{"translation": "What about the former Value column, because it's a way of uniting in a way that, uh, is a way of uniting."}
+{"translation": "Then it'll automatically merge."}
+{"translation": "And there's another thing about PA-PALO in the internal storage engine, which is that we support the objectification view."}
+{"translation": "For example, a table like the one on the left is our basic data, our raw data."}
+{"translation": "And then when you import PALO, we generate a base table."}
+{"translation": "And then, as we said earlier, PALO's sorted by Key column, so the order changes a little."}
+{"translation": "But if one assumes that we need such a scenario, that is, the user, that his queries contain only the ID column here and its PV column, and that there is no concern for the time column and the non-provincial column, then at that point we can build a homogenous view and then reduce the columns."}
+{"translation": "That would result, for example, in the creation of such a matrix, with only IDs and PVs in it."}
+{"translation": "When the user comes to the query, if he does not need to use the time column and the province column, we can respond directly with this matrix, so the speed will increase."}
+{"translation": "Of course, it has a weakness."}
+{"translation": "And that's what you're doing when you generate this objectification view, and it takes a small fraction of that data space."}
+{"translation": "It's just that we're having a little bit of a trade-off in the production environment."}
+{"translation": "Well, one more thing, cough, is that this objectification view, which is automatically updated when you import, and then automatically locates automatically when you search, uh, so that the user does not need any extra intervention."}
+{"translation": "Here's a few other important features of PALO's physical storage."}
+{"translation": "First of all, we support the list, and, of course, we support the list, and at the same time we support the list."}
+{"translation": "What's the advantage of that?"}
+{"translation": "The first, uh, when you ask, is when you have only a part of the column and not all of the columns, because it's stored separately for each column, so that the amount of data that needs to be cleaned is small."}
+{"translation": "And the other is that when you put each column of data together, then this column of data is in the same format, so that when we go to storage, we compress it and reduce the amount of data that is stored to a storage space."}
+{"translation": "Ah, PALO's in support of the two-storey division."}
+{"translation": "And then what about the division?"}
+{"translation": "This is for a large processing system, and it's bound to spread the data over a number of machines."}
+{"translation": "So what's a two-storey partition?"}
+{"translation": "What do we, uh, have in comparison to the traditional layer of partitions?"}
+{"translation": "First of all, our uh PALO's two-storey partition can, uh, easily isolate old and new data."}
+{"translation": "For example, a new, uh, new division is me, for example, in the first sector, where we separate the data from the data through the dimension of time, so that the new data will be imported into the new, new, first-level division, and then the old data will be left in the older, older sector."}
+{"translation": "And that's how it actually reduces a lot of historical data, and that's what we do when we go to the bottom of the backstage to store the engine."}
+{"translation": "And there's a way to simplify the size of the table."}
+{"translation": "How do you say that?"}
+{"translation": "Let's say we're in one layer of partition, and we're holding an uh, commonly used Hash partition, so when you keep increasing the amount of data, and you can't deal with it, you want to reduce the amount of data in each barrel, and you just have to increase the number of partitions."}
+{"translation": "But for a Hash bucket, if you need to add, uh, you need to respirator, it's a very high price, because you need to recalculate all the data."}
+{"translation": "But there's no, uh, there's no need for a two-tier division, and when my data is constantly increasing, I just have to adjust this Hash bucket number on the basis of the two-storey partition in the interior when I'm building a new, uh, level-one partition."}
+{"translation": "Here's an example of an uh, SQL statement that we're in an uh, uh, two-storey partition."}
+{"translation": "First of all, you look at the dimension of time, and it's a first-tier partition, and then it's a Hash bucket, and it's got 32 barrels."}
+{"translation": "One example of a two-tiered division, one example of a grammar."}
+{"translation": "Then PALO supports the concept of hierarchical storage."}
+{"translation": "So what's the concept of graded storage?"}
+{"translation": "So, for example, our servers are both SSD and mechanical hard drives."}
+{"translation": "So one S, on the one hand, we really want to use SSD's high performance, and, on the other hand, because SSD's smaller and smaller, we have to use the mechanical hard drive."}
+{"translation": "But on the other hand, from the point of view of our inquiries, when data can generally be divided into new data and older data, the probability of new data being searched is much higher than older data."}
+{"translation": "So we can put new data on SSD, and then old data on machine hard drives."}
+{"translation": "But it's very costly if our manual needs to actually store that data to move it."}
+{"translation": "So PALO supports automatic migration and movement of these data, between SSD and mechanical hard drives."}
+{"translation": "Now, let's talk about how some of the PA PALO's performance is going to be high and some of the features."}
+{"translation": "First of all, what we've already mentioned, uh, is that PALO is an executing engine for MPP."}
+{"translation": "What's a MPP?"}
+{"translation": "It's an acronym for large-scale parallel processing."}
+{"translation": "This is actually one of the cores of PALO's high performance."}
+{"translation": "And on the other hand, we're PALOs for quantitative implementation."}
+{"translation": "Uh, it's a quantitative implementation that is actually a very low-level, uh, optimisation."}
+{"translation": "It reduces some, uh, of some, uh, CPU-based, waterlines. It's more friendly, and then branch forecasts are better."}
+{"translation": "And then there's one that says, \"Well, we're uh for one because we're distributed, and then we're um, PALO, and we support a very common Merge-Sort."}
+{"translation": "And that's when we sort a big big amount of data in order of order, we sort it together between multiple nodes."}
+{"translation": "And then it's better for the uh-to-the-o-o-o-o than for the uh-o-o-o-o-o."}
+{"translation": "And then there's the idea of sorting out a couple of large-scale aggregates, and then if you have a huge amount of data, there's no way that memory can work, and at that point we're supporting the data."}
+{"translation": "And then, um, when our execution and storage were very good."}
+{"translation": "One of the problems that we often encounter is that when more than one user uses the same cluster, one user interacts with another."}
+{"translation": "Also, for the same user, its different queries, or rather its imports, are interactive between imports and queries, and between queries and queries."}
+{"translation": "Why?"}
+{"translation": "Because this uh resource for the uh system is limited."}
+{"translation": "When he sent a very large query, it was possible that other inquiries would be affected."}
+{"translation": "Well, at this point in time, we, PALO, are offering a whole, uh, resource-segregated package of solutions to this problem."}
+{"translation": "Well, let's just say we're in favour of setting a certain priority for the operation, and then, like High, Low, Normal."}
+{"translation": "And then make sure that between these different queries, it doesn't say that because you have a very big gap, you take away all the resources from the other queries, and then this little one cannot be carried out."}
+{"translation": "Well, of course we're on the inside to achieve the Group."}
+{"translation": "A detailed option for the physical isolation of our resources, the latest version of which we continue to optimize, and then, uh, now we're on the cloud and then we're going to be better off with the next version of the resource segregation that we're going to have to come up with."}
+{"translation": "Okay, let's not go into detail here."}
+{"translation": "Here's one of our simple, uh, introductions."}
+{"translation": "Uh, and then for the uh, uh, uh, the import and export function of PALO."}
+{"translation": "Because, uh, we're supporting a variety of ways of importing, like your data, whatever it is, like, on Hadop, you're on the local, you're on the bos."}
+{"translation": "Ah, we can all support the import of our PALO system."}
+{"translation": "And then there was, uh, a scene where the user, he also supported the import of a multi-watched atom that went into effect."}
+{"translation": "So when you import your atoms into multiple tables, this is what users do at times in business, and that's what we can guarantee."}
+{"translation": "And then we export that we're similar to imports."}
+{"translation": "We also support one of the data destinations, like multiple data sources, one of the ones that supports Hadop, the Bos, and the storage of these uh storages."}
+{"translation": "And then we'll introduce it, which means that PALO is an O.OLAP is a sort of scene that's out of the way, a report and an analysis."}
+{"translation": "So, in response to some of the scenes you've been analyzing, we've provided some of the SQLs, some of the strong support, just some of the upswings."}
+{"translation": "First of all, we support what is worth mentioning is that our PALOs support window functions, and this one, with analytical experience, probably feels like you've got a window function, that you're very high in terms of calculation, ranking, ring comparison, or that the owners have become very simple, uh, and efficient."}
+{"translation": "Then, for example, three of the top paid people in the same sector, which is difficult to do without window functions."}
+{"translation": "Let's try it."}
+{"translation": "And, uh, we're just trying to improve the user's ease of use."}
+{"translation": "Ah, we're on a customer basis at MySQL, and you can easily do, for example, when we call and see our help files, you don't have to say it. You just have to connect to our service, you can connect to our service with MySQL, and you can easily access help and help with information."}
+{"translation": "You, uh, Help is grammar, like MySQL, Herp whatever."}
+{"translation": "For example, if you want to see the import, Help Load can."}
+{"translation": "Well, that would reduce the number of users who, uh, help with different files, help the pages switch between them, and it would be very user-friendly to use them when you use them."}
+{"translation": "Uh, PALO's, uh, uh, something, basically, it's just here."}
+{"translation": "Well, what's down here is that we, uh, are now open to some of our contacts."}
+{"translation": "First of all, this 100-degree open cloud is the PALO, which has access to the 100-degree open cloud, and then this link allows you to understand some of our products and functions in detail by going to the cloud."}
+{"translation": "And if there's a problem, you can send us an e-mail."}
+{"translation": "All right, thank you!"}

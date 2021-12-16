@@ -1,0 +1,176 @@
+{"translation": "All right, that guy just spoke very well."}
+{"translation": "And then I went on to this, uh, conversation, and I went on to talk to you."}
+{"translation": "And, uh, you get into that UNIT platform, and we can first enter the unit.baidu.com's front page on the UNIT platform in the browser, and then click \" use \" from the first page, and then enter the real management page on the backstage of the UNIT platform."}
+{"translation": "In the UNIT platform, we define the range of things that a robot can handle as a scenario."}
+{"translation": "That scene usually corresponds to a robot that handles specific tasks."}
+{"translation": "So, uh, for your convenience, I'm using robots to replace the scene."}
+{"translation": "Well, what we're going to look at here is a practical example of how to create a robot on our UNIT platform that is, um, capable of handling actual tasks."}
+{"translation": "Okay, well, that's the first step, so you can name the robot after the \"new scene.\""}
+{"translation": "So, for example, we're building a robot called the Stars' Little Auxiliary to help us check the constellations."}
+{"translation": "And then this dot \"recognize\" and then this empty robot is built."}
+{"translation": "We're looking at a new layer."}
+{"translation": "That's the description of this robot."}
+{"translation": "And then it's got some fields that will show the robot's current state."}
+{"translation": "Uh, then click on the view, and we can go into this configuration page of this robot."}
+{"translation": "Uh, in the UNIT platform, robot configurations are divided into three parts."}
+{"translation": "The first part is that we need to define what this robot can do."}
+{"translation": "In the second part, I would like to define what knowledge I want to teach robots so that they can understand human instructions."}
+{"translation": "The third part is to let the robots learn, digest and absorb this knowledge."}
+{"translation": "And I went online to verify what the robot had learned, whether it had learned what we had taught it, as we thought it would."}
+{"translation": "Uh, in the UNIT platform, each robot is made up of a single unit."}
+{"translation": "Well, like that Cosine said, it's two or two parts."}
+{"translation": "One part deals with dialogue and the other with questions and answers."}
+{"translation": "Because this is a simpler scenario, looking at the constellation, we just need to build a dialogue module."}
+{"translation": "Well, of course, if your robots are particularly complicated, you can go to the joints by a variety of units, OK."}
+{"translation": "Well, here's an answer to a question by name, isn't it?"}
+{"translation": "Well, we're now defining what robots can do."}
+{"translation": "It's obvious that there are two parts to be made, one that I define the user and what he might ask, and the other that I'm the robot to answer under what circumstances."}
+{"translation": "The part where users ask, there were two concepts. I don't know if you've noticed."}
+{"translation": "One is intent, one is word chute."}
+{"translation": "So I'm going to quote here. The intention is, you're a robot that wants to do a major thing, what's the main thing."}
+{"translation": "The second is the chute, which is about what conditions you need to do this."}
+{"translation": "In the case of constellation traffic inquiries, it is clear that this is what the constellations are looking for."}
+{"translation": "I can name it by a simple name, Luck-Search, and then add an alias, a motion query."}
+{"translation": "So I've got a clear definition of the main area in which I live."}
+{"translation": "Well, the second condition is that, well, we usually say, until we find out what the constellation is, what your constellation is, and when you're going to check it again, right?"}
+{"translation": "That would require two conditions, one for his constellation name and the other for the date on which his number was to be searched."}
+{"translation": "Oh, in the UNIT platform, we're doing it through this vocabulary."}
+{"translation": "The first, for example, on the condition that we now want to create a constellation name, let's have a name, which we now use in English to represent."}
+{"translation": "And then you clarify that when the user does not describe what constellation he is, you can add a counter-question, for example, which constellation you want to search for?"}
+{"translation": "And then the next step."}
+{"translation": "Uh, we know that constellation numbers can be listed."}
+{"translation": "We know that constellations are about 12 constellations."}
+{"translation": "A dictionaries for the number of users can be uploaded in advance."}
+{"translation": "Well, I don't show the dictionaries here, but it's 12, uh, maybe 12 dictionaries."}
+{"translation": "And then the next step."}
+{"translation": "So this constellation is so simple that the slot for the name of the constellation has been established."}
+{"translation": "The second is that users let us say some dates."}
+{"translation": "But these dates are clearly different from constellation names, and they cannot be listed."}
+{"translation": "If you want to enumerate the time, as we have previously understood the task of this natural language, it is clearly unlikely."}
+{"translation": "However, in order to be user-friendly, the UNIT platform uses this level of capacity as equivalent to allowing users to directly re-use the capabilities placed in our system."}
+{"translation": "So we call it the \"user_date\" condition."}
+{"translation": "And the question is, \"What day are you looking for?\" OK."}
+{"translation": "Ah, let's look at the identification of many of these built-in phrases that are embedded in the UNOIT platform, including the video names, the names, the names of the institutions."}
+{"translation": "The number does not require a user to pass on any word slot, but simply a simple tick."}
+{"translation": "Now, for example, I'm going to do a constellation traffic query, and just pick one of the sys_times that our system provides, that's the time of the user count, and then a little bit of the next step, OK?"}
+{"translation": "So I've already defined this part of what users want to ask."}
+{"translation": "Let's look at it again, 'cause it's probably more than that right now."}
+{"translation": "In fact, if you really do it, it'll be about a minute or so before you can define the part of the user's question."}
+{"translation": "And the second part is the scene response, and that's what we robots say."}
+{"translation": "Now, let's start with a simple word, \"Okay, let's find out.\""}
+{"translation": "Well, we know that when it is possible to actually do an application, in addition to that language, we have to add a part of this resource query."}
+{"translation": "When we do a constellation search, for example, you obviously need to find out what happens to this, uh, constellation of stars one day."}
+{"translation": "At this point, it's obvious that before you go to the inquiry, you have to collect two conditions."}
+{"translation": "And then, for the UNIT platform, if the two slots are necessary in your query, you can set some conditions to do it."}
+{"translation": "Well, here we have a simple operation, so you don't have to go in here and add it, and you can click on the brain."}
+{"translation": "That automatically generates two conditions, which means that the robots take it back for this inquiry only when the user makes his date clear and his constellation clear;"}
+{"translation": "If it is not made clear, further counter-questioning is what has just been done to clarify words."}
+{"translation": "And then click to save."}
+{"translation": "So that part of what I can do with a robot is clearly defined."}
+{"translation": "You can look at it as a whole, which means that we've defined the user and what he might ask, and under what conditions my robot would answer."}
+{"translation": "This is the first part, teaching this robot what to do."}
+{"translation": "The second part is that I'm gonna have to prepare some knowledge to teach robots, and say, uh, you're going to learn in this way, and you're going to understand what I'm going to do."}
+{"translation": "It's a matter of time. I'm going to pass on a sample of words that we used to make in the system."}
+{"translation": "OK, well, let's see one example."}
+{"translation": "What do you learn about robots?"}
+{"translation": "In short, the user said, \"To check the constellation position,\" so what do we need to teach robots?"}
+{"translation": "One of the things I'm going to teach robots is to tell robots that the user's intention now is to check out \u201chis movements\u201d, and he's unconditioned."}
+{"translation": "Just keep this simple and mark it."}
+{"translation": "The second is that his user may say that he may have made his constellation clear about the Aquarius movement."}
+{"translation": "So it's clear that he's going to do this or check it out, and he's going to do it on that condition, and he's going to have to mark it."}
+{"translation": "Ah, something like that. If he looks at it today, he labels it as a big date."}
+{"translation": "If this is a more complete one, perhaps the user will simply say, \u201cI'm going to check the movement of the Taurus tomorrow\u201d, and we will just tell the robot that the purpose of the user is to check the movement, and his two conditions, one is the Taurus, the constellation, and the other is that his date is tomorrow."}
+{"translation": "Well, I made about ten, ten, ten, ten samples to teach the robots, and, uh, you're gonna do it when the user says those ten words."}
+{"translation": "And then I'm going to use these 10 samples as an example of what we're doing today with the UNIT platform, which means that when the robot listens to these ten sentences, it actually learns more, and, uh, more than that."}
+{"translation": "OK, when we define what robots do, what robots do in the configuration, and what robots can learn when I'm ready at the data centre, then there's only one thing we have to teach them."}
+{"translation": "In the UNIT platform, we added a button to the training programming called the Training and Entry into Force Model."}
+{"translation": "After selecting the sample that just uploaded, uh, click on the training."}
+{"translation": "Just when the robot started learning to absorb this uh process."}
+{"translation": "Because of the timing, I can show you something that we did exactly exactly the same."}
+{"translation": "We can take a look at this before this."}
+{"translation": "This configuration is exactly the same."}
+{"translation": "There's no difference, it's just that its users ask us the same thing as its robot says to us."}
+{"translation": "And its data centre and the samples it uses are just those ten words."}
+{"translation": "Well, that's been trained successfully."}
+{"translation": "Let's just drop the machine training."}
+{"translation": "At this point, can we try this robot now learn something through these ten sentences?"}
+{"translation": "We can compare it."}
+{"translation": "The right is its real robotics."}
+{"translation": "On the left, let's add an example."}
+{"translation": "I would like to ask, for example, the question of \u201csurveillance\u201d, which is clearly what I did not say in those 10 sentences."}
+{"translation": "But robots have learned this thing, right?"}
+{"translation": "The robot says, \"What day is your date?\""}
+{"translation": "OK, like I said now is uh, next Saturday."}
+{"translation": "OK, it shows us that, in addition to knowing the intentions, it identifies the robot with this date and knows next Saturday."}
+{"translation": "And then the question is, which constellation are you looking at?"}
+{"translation": "Okay, let's add another white sheep."}
+{"translation": "OK, so that's how it's done with a erm... and it's done with a certain query of this kind, which we call satisfaction, and it's done."}
+{"translation": "Uh, yeah, it's a multi-cycle example."}
+{"translation": "Let us give another one-wheel example of how robots can answer when we explain all the conditions in one round."}
+{"translation": "Well, you're supposed to be able to see those ten words, aren't you?"}
+{"translation": "Check the constellations."}
+{"translation": "Check the sign of the white sheep."}
+{"translation": "Check today's movement."}
+{"translation": "Let me assume that I would like to say one word now, to tell me about the scorpion of Scorpio next Sunday."}
+{"translation": "That's obviously to the right, and I've never told a robot this side that that's what I'm talking about, and the robot understands that, right?"}
+{"translation": "Try it."}
+{"translation": "Robots can fully understand that."}
+{"translation": "It knew that this man wanted to check his movements and that his constellation was Scorpio and that his date was next week."}
+{"translation": "Um, can I, uh, look again at what the developers can do with the UNIT platform if they look at next Sunday?"}
+{"translation": "It defines next morning to that specific date, 3 December 2017."}
+{"translation": "Everyone can go check it out."}
+{"translation": "It's also one of the functions of UNIT, which is special."}
+{"translation": "Well, we just saw this proof page, just to make it easier for the configuration to see his robotic effects."}
+{"translation": "And, actually, when you're done, it's a complete back-office service for us, which can be called in the form of an API."}
+{"translation": "In addition to this API form, we are now connected to this 100-degree Dueros operating system."}
+{"translation": "All you have to do is set this up on a UNIT platform, set up a robot and post it to this Dueros."}
+{"translation": "Of course because Dueros may have to have some vetting."}
+{"translation": "Once approved, you can enter the skills store on the Dueros shop at UNIT UNIT."}
+{"translation": "I've just demonstrated that this is the case of the Constellation Auxiliary, which we've actually posted to that Dueros skill store."}
+{"translation": "And then this is the configuration process of a simple one-scenario set-up of the eUNIT platform."}
+{"translation": "Okay, the one who gave us the stage."}
+{"translation": "Okay, okay."}
+{"translation": "Thank you, Xiaoming!"}
+{"translation": "Well, at the end of the day, I would like to briefly describe the entire course of our development."}
+{"translation": "On July 5, we completed the launch of the entire UNIT platform."}
+{"translation": "In four months, we actually did a lot of upgrades."}
+{"translation": "As we can see on 5 July, in fact, we only published such an understanding, which is the dialogue module."}
+{"translation": "And then, at the beginning of August, we released our SDK."}
+{"translation": "And then it can be tied directly with our SDK and voice."}
+{"translation": "And then we can post the amount that can be added to this i SDK, which actually includes the IOS version of IIS, and the Andre version."}
+{"translation": "Then, by September, we completed the entire question-and-answer session that we were talking about."}
+{"translation": "And then we did a distribution of the whole shared function."}
+{"translation": "And then, in October, the formalization of our verbs went on the line, and that is to say, you don't have to define them in a single verb."}
+{"translation": "It's about how it can be defined in some regular expressions."}
+{"translation": "And in addition to that, our 100-star developer competition was successfully concluded."}
+{"translation": "Then we should end up with more than 700 teams, then 200 teams, and we end up with eight teams winning."}
+{"translation": "And then, in November, that's the month."}
+{"translation": "This month, two big things."}
+{"translation": "The first thing is that Dueros, which we've just seen, is an arithmetic line that actually means that one of our 100-degree dialogue platforms, one of which is an ecological system, and the other of which is actually a technology system, one of which connects to one of these two platforms."}
+{"translation": "And then, we're at the 100th World Congress, and although we're not doing a lot of publicity on that one, we can look at the financial one, a voice transfer function that we're working with the farm, and it's published on that one."}
+{"translation": "And then, the gold medal sale we just saw in a smart customer's dress was also posted in that place."}
+{"translation": "Besides, some of the smart things on our smart airport are some of the question-and-answer robots on that airport, which were also released there."}
+{"translation": "So, actually, we've been doing this as a 100-degree brain to support some of the 100-degree conversational understandings."}
+{"translation": "And then what's actually going to be interesting, that's when we were in December."}
+{"translation": "I will now tell you very clearly that, first of all, we can support commercial deployments."}
+{"translation": "And then in December, and then, then, we actually run the whole backstage API, which is that you can do some of the words in the API way, some of the training triggers, and so on, and so on, we'll publish some of the APIs next month."}
+{"translation": "And then, and then, we talk about Bot, and you always want to talk about Bot, and then this chat Bot comes out next month."}
+{"translation": "And beyond December, next year we will actually write about those points that I have just written, and in fact our overall planning should be within Q1 and Q2."}
+{"translation": "Then we begin with a very significant upgrade of our QU and DM capabilities, if anything."}
+{"translation": "I'll give you some details."}
+{"translation": "For the time being, it is kept secret."}
+{"translation": "Then the other is our entire training architecture, that is, if the stability and survival of our training as a whole are the efficiency that came into effect, we will have a very important reform, and that will be done around the beginning of next year."}
+{"translation": "And then some of our more data management capabilities will be upgraded and adapted in the data centre."}
+{"translation": "And that's all going to be done by the beginning of the year or eight."}
+{"translation": "And then there's more and more."}
+{"translation": "Because my entire schedule of projects has already drawn several pages."}
+{"translation": "And then I'm just showing you what's the fastest thing to see in there."}
+{"translation": "Yeah, some of these abilities are going to be under all of our development engineers, and it's going to be quick to meet you, isn't it?"}
+{"translation": "And then, uh, so it's just that our platform, although it's just been on the line for more than four months, actually we're a very dynamic and fast-growing one."}
+{"translation": "And it is to be hoped that you will be able to come and use it more, and then go and give us more ideas and suggestions about its use, which will facilitate our entire platform to move forward more quickly and better."}
+{"translation": "You know, there's a lot of technology in here, but it's all our developers' feedback to our side."}
+{"translation": "And then we line it up quickly, and then we go make it, wow."}
+{"translation": "And then, uh, you can see the web site of our UNIT platform, which you've just seen, unit.baidu.com."}
+{"translation": "You can all come up here and try it out."}
+{"translation": "And then, actually, we're going to have an important partner in 100-degree UNIT, Mr. CTO Chen Jianhow, to share with us."}
+{"translation": "Okay, there you go."}

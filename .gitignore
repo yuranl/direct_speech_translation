@@ -137,6 +137,8 @@ eval/data
 eval/*.sgm
 eval/*.wav
 eval/*.json
+evaluation-1214/trimmed/
+output_connected
 
 # trained models (parameters)
 *.pth

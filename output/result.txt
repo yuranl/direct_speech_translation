@@ -1,0 +1,86 @@
+D:\Github\direct_speech_translation\eval>perl mteval-v13a.pl -r refbaseline.sgm -s srcbaseline.sgm -t tstbaseline.sgm
+MT evaluation scorer began on 2021 Dec 15 at 21:21:10
+command line:  mteval-v13a.pl -r refbaseline.sgm -s srcbaseline.sgm -t tstbaseline.sgm
+  Evaluation of chs-to-eng translation using:
+    src set "baseline" (1 docs, 21 segs)
+    ref set "baseline" (1 refs)
+    tst set "baseline" (1 systems)
+
+length ratio: 0.902274905980385 (48943/54244), penalty (log): -0.108309666346566
+NIST score = 6.2834  BLEU score = 0.1517 for system "tstbaseline"
+
+# ------------------------------------------------------------------------
+
+Individual N-gram scoring
+        1-gram   2-gram   3-gram   4-gram   5-gram   6-gram   7-gram   8-gram   9-gram
+        ------   ------   ------   ------   ------   ------   ------   ------   ------
+ NIST:  4.9278   1.1514   0.1740   0.0259   0.0044   0.0012   0.0003   0.0001   0.0000  "tstbaseline"
+
+ BLEU:  0.6315   0.2690   0.1018   0.0472   0.0245   0.0140   0.0084   0.0051   0.0032  "tstbaseline"
+
+# ------------------------------------------------------------------------
+Cumulative N-gram scoring
+        1-gram   2-gram   3-gram   4-gram   5-gram   6-gram   7-gram   8-gram   9-gram
+        ------   ------   ------   ------   ------   ------   ------   ------   ------
+ NIST:  4.9278   6.0792   6.2532   6.2791   6.2834   6.2846   6.2849   6.2850   6.2851  "tstbaseline"
+
+ BLEU:  0.5667   0.3699   0.2321   0.1517   0.1031   0.0726   0.0525   0.0387   0.0290  "tstbaseline"
+MT evaluation scorer ended on 2021 Dec 15 at 21:21:18
+
+D:\Github\direct_speech_translation\eval>perl mteval-v13a.pl -r refMT.sgm -s srcMT.sgm -t tstMT.sgm
+MT evaluation scorer began on 2021 Dec 15 at 21:22:18
+command line:  mteval-v13a.pl -r refMT.sgm -s srcMT.sgm -t tstMT.sgm
+  Evaluation of chs-to-eng translation using:
+    src set "MT" (1 docs, 21 segs)
+    ref set "MT" (1 refs)
+    tst set "MT" (1 systems)
+
+length ratio: 1.14023670820736 (61851/54244), penalty (log): 0
+NIST score = 5.9673  BLEU score = 0.1546 for system "tstMT"
+
+# ------------------------------------------------------------------------
+
+Individual N-gram scoring
+        1-gram   2-gram   3-gram   4-gram   5-gram   6-gram   7-gram   8-gram   9-gram
+        ------   ------   ------   ------   ------   ------   ------   ------   ------
+ NIST:  4.6289   1.1377   0.1733   0.0234   0.0040   0.0008   0.0003   0.0001   0.0000  "tstMT"
+
+ BLEU:  0.5863   0.2501   0.0935   0.0417   0.0214   0.0119   0.0069   0.0042   0.0026  "tstMT"
+
+# ------------------------------------------------------------------------
+Cumulative N-gram scoring
+        1-gram   2-gram   3-gram   4-gram   5-gram   6-gram   7-gram   8-gram   9-gram
+        ------   ------   ------   ------   ------   ------   ------   ------   ------
+ NIST:  4.6289   5.7666   5.9399   5.9633   5.9673   5.9681   5.9684   5.9684   5.9684  "tstMT"
+
+ BLEU:  0.5863   0.3829   0.2393   0.1546   0.1041   0.0725   0.0518   0.0379   0.0281  "tstMT"
+MT evaluation scorer ended on 2021 Dec 15 at 21:22:26
+
+D:\Github\direct_speech_translation\eval>perl mteval-v13a.pl -r refconnected.sgm -s srcconnected.sgm -t tstconnected.sgm
+MT evaluation scorer began on 2021 Dec 15 at 21:22:51
+command line:  mteval-v13a.pl -r refconnected.sgm -s srcconnected.sgm -t tstconnected.sgm
+  Evaluation of chs-to-eng translation using:
+    src set "connected" (1 docs, 21 segs)
+    ref set "connected" (1 refs)
+    tst set "connected" (1 systems)
+
+length ratio: 1.06551876705258 (57798/54244), penalty (log): 0
+NIST score = 1.7197  BLEU score = 0.0137 for system "tstconnected"
+
+# ------------------------------------------------------------------------
+
+Individual N-gram scoring
+        1-gram   2-gram   3-gram   4-gram   5-gram   6-gram   7-gram   8-gram   9-gram
+        ------   ------   ------   ------   ------   ------   ------   ------   ------
+ NIST:  1.6154   0.0958   0.0067   0.0014   0.0003   0.0001   0.0000   0.0000   0.0000  "tstconnected"
+
+ BLEU:  0.2974   0.0271   0.0040   0.0011   0.0004   0.0001   0.0000   0.0000   0.0000  "tstconnected"
+
+# ------------------------------------------------------------------------
+Cumulative N-gram scoring
+        1-gram   2-gram   3-gram   4-gram   5-gram   6-gram   7-gram   8-gram   9-gram
+        ------   ------   ------   ------   ------   ------   ------   ------   ------
+ NIST:  1.6154   1.7113   1.7180   1.7194   1.7197   1.7198   1.7198   1.7198   1.7198  "tstconnected"
+
+ BLEU:  0.2974   0.0898   0.0317   0.0137   0.0068   0.0034   0.0016   0.0008   0.0005  "tstconnected"
+MT evaluation scorer ended on 2021 Dec 15 at 21:22:58

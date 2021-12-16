@@ -1,0 +1,262 @@
+{"translation": "Ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah-ah!"}
+{"translation": "And it's really exciting to see so many people, and it's just that we're all so passionate."}
+{"translation": "And then, actually, what we've just seen is that we've got a lot of speech technology ahead of us."}
+{"translation": "In other words, what is actually in the middle of it is what it is that gives you, that is, a technology that translates our words, what we say, into words."}
+{"translation": "And on my side, it's actually behind the voice, and we've been quiet in the back."}
+{"translation": "What we are going to solve then is how some of the elements in this text can be properly understood so that the machine can truly understand what it means."}
+{"translation": "So, I'm here today on the topic of \u201cUNIT Language Understanding and Interactive Technologies\u201d."}
+{"translation": "Then let's look back. What the hell is Al?"}
+{"translation": "It's actually simple."}
+{"translation": "We've come up with a concept like AI since the 1960s."}
+{"translation": "After all these decades, in fact, we have been doing the exact same thing that scientists and computer engineers have been trying to do \u2014 to give the machine a human capacity."}
+{"translation": "So he needs to let, what kind of human power do we want the machine to have?"}
+{"translation": "First of all, we're going to have to be able to speak."}
+{"translation": "We have to make it possible for robots to hear and speak."}
+{"translation": "And beyond that, we need to be able to understand the image."}
+{"translation": "As we have just described, it can read people, and it can draw certain images."}
+{"translation": "And secondly, it needs to have language skills that enable the machine to understand this language, which are some of the actual meanings behind it."}
+{"translation": "And finally, we expect the machine to have the capacity to do something that it can do autonomously."}
+{"translation": "And at a deeper level, we actually expect the machine to have the ability to think first, to think and to reason like we human beings."}
+{"translation": "Beyond that, we expect that the machine will have the knowledge, for example, that it will be able to accumulate a great deal of knowledge like our human race, and that it will be able to apply it throughout our thinking."}
+{"translation": "And then, of course, in the end, we need to give the machine a very important ability to learn."}
+{"translation": "So what's in the middle of these abilities is actually that I'm going to focus today on language skills."}
+{"translation": "Let's take a look at it. Why do we mean that you've been investing a lot of energy in language-related artificial intelligence technology?"}
+{"translation": "Indeed, the most central problem is that we consider language to be such a vehicle of thought and knowledge."}
+{"translation": "Why is language the vehicle of thought?"}
+{"translation": "In fact, one can imagine that much of what we think now, much of what we say, is actually in the form of language."}
+{"translation": "So it actually includes the fact that some of the relevant reports are being made to you now, and I'm also conveying my thinking through language."}
+{"translation": "And beyond that, we actually think that language is the vehicle for condensing and passing knowledge."}
+{"translation": "You can also look at some of these graphs, from the most ancient to the engraving of Lake Ja, and then all the way to Oracle to an Internet figure such as the one that has evolved to the present."}
+{"translation": "The form of the knowledge carry has been changing and is constantly escalating."}
+{"translation": "And even then we might have more of these loads."}
+{"translation": "But what's the only thing that doesn't change? It's language."}
+{"translation": "It allows us to understand our knowledge."}
+{"translation": "We have 5,000 years of culture."}
+{"translation": "So we have more and more cultures that can pass through these thousands of years of barriers all the way to the present."}
+{"translation": "They're probably all the same."}
+{"translation": "So we can think of language as a very important part of artificial intelligence."}
+{"translation": "So in an era like today, what do we expect to do?"}
+{"translation": "Indeed, we have entered an era of artificial intelligence, and of course we expect languages to play a very important role here."}
+{"translation": "So what kind of a character is that?"}
+{"translation": "Indeed, in recent years we have been raising such a concept as the so-called \u201cdialogue as a platform\u201d."}
+{"translation": "And that is actually what is expected of us to interact directly with the machine in the form of dialogue, then to enable the machine to understand what we say and, at the same time, to enable the machine to say what we expect it to say."}
+{"translation": "Let's start with a video."}
+{"translation": "How's the weather today?"}
+{"translation": "It's clear today."}
+{"translation": "Kodo-chan, go to the Beijing Garry Center."}
+{"translation": "Find three routes."}
+{"translation": "Which one?"}
+{"translation": "The first one."}
+{"translation": "How long before you get to your destination?"}
+{"translation": "One hour and 29 minutes from the destination."}
+{"translation": "Kodo-chan, I'm going to Yoyo City."}
+{"translation": "You've been set up to drive to Yoyo City."}
+{"translation": "What do you want to eat later?"}
+{"translation": "Hotpot."}
+{"translation": "All right!"}
+{"translation": "A small search of the nearby fire pot shop."}
+{"translation": "Navigator to number one."}
+{"translation": "The first one."}
+{"translation": "Start navigation."}
+{"translation": "Doo-Doo, I'm going to put some gas on the road!"}
+{"translation": "A driving route through the gas station has been planned."}
+{"translation": "Uh, it's already online."}
+{"translation": "If you open the 100-degree map, you'll be able to use it."}
+{"translation": "And why would I put a video like this in here?"}
+{"translation": "In fact, this is actually a very critical technology, which is that, through dialogue, we just need to talk, and then we can easily control what we have, a device like this, and then let it implement all the directives that we expect it to carry out."}
+{"translation": "It actually includes some dissipation with fingertips, and then we have multiple rounds of dialogue, and then we have some understandings in various languages and even some generalizations in my various expressions."}
+{"translation": "Some of these capabilities are actually one of the technologies that works for some of our core NLP identifiers, and this technology is actually supported by our UNIT platform."}
+{"translation": "So what you've just seen is that all of us can get through our UNIT platform."}
+{"translation": "So, after looking at such an example, let us look at in detail how the system of dialogue is actually made up."}
+{"translation": "A conversation like that was actually how it was done behind our computer."}
+{"translation": "It's simple, two big areas."}
+{"translation": "The first area is voice."}
+{"translation": "We say one thing, and then our voice recognition module will recognize it as a text."}
+{"translation": "And then, actually, into an area like our NLP."}
+{"translation": "And in this field, through a technique that we're going to understand in language, we're going to take out some of the core knowledge in a phrase like this, and we're going to take out its intentions."}
+{"translation": "And then we're going to maintain a state of dialogue, and in many rounds of dialogue, we're going to merge this knowledge and then we're going to filter it out through these states that are our last movement."}
+{"translation": "Then, through a module called NLG, the language of nature, we can all be able to put all that we just said, that our computers want to go, that we want to bring together some of the languages to be expressed by computers and some of the knowledge that we have retrieved, and then form a language that we expect to be expressed by computers."}
+{"translation": "And then we synthesize it through TTS, and then we get the computer to say it."}
+{"translation": "This is an integral part of a complete system of dialogue."}
+{"translation": "Well, that's a really complicated set, because it actually involves a number of key technologies at the core."}
+{"translation": "We've actually seen a number of different levels of technology at various levels of voice, including recognition and synthesis."}
+{"translation": "And then, in NLP, you see a lot of these low-level technologies."}
+{"translation": "At the bottom, in fact, it needs to rely on some basic terminological analysis, as well as on a large number of other types of behaviors and data that are users, in order to be able to learn a more fluid dialogue and generalization that we have just seen."}
+{"translation": "So, actually, some of these technologies, if we don't have a particularly large research and development team, may be hard to get to a more perfect state."}
+{"translation": "So, uh, but it doesn't matter, it's just that we're open."}
+{"translation": "So we're opening up UNIT now in order to solve a problem that allows our vast developers to make it possible for our vast developers to build on a platform like ours to complete some of the configurations that we have just made."}
+{"translation": "All we need to do is simply do a little bit of a little bit of a little bit of custom on this, and then we can give it a little bit of training material to do it."}
+{"translation": "Then let's see what kind of support we actually have on this platform."}
+{"translation": "First of all, we just talked about our technology."}
+{"translation": "And then, then, we have some powerful ability to customize, and then what?"}
+{"translation": "We actually have some big data on our real size."}
+{"translation": "The whole thing is packed in UNIT and made available to you."}
+{"translation": "Then, if we want to, we can open up our technology and then we can give it to our products."}
+{"translation": "And at the same time, it can create an ecological resonance with our vast developers."}
+{"translation": "And in this, the most critical technology has two big parts."}
+{"translation": "The first part is called the technology of language understanding, and the second part is called the technology of multiple rounds of interaction."}
+{"translation": "And at the heart of this is that behind these two technologies is actually some of the underpinnings of our basic technology and basic data."}
+{"translation": "Then we can take a closer look."}
+{"translation": "First of all, we provide on this platform an understanding capacity that is oriented towards intentions and phrases."}
+{"translation": "It's actually simple."}
+{"translation": "The expression of such a user \u2014 query \u2014 is a text, and then our identification model will recognize it as an intention of a reserved restaurant."}
+{"translation": "And then we'll take out some of the key information from here, and we'll take it and we'll take it down to one, for example, the name, the time and the number of people in the restaurant."}
+{"translation": "And then, usually in a real application like this, users don't talk about all the key elements to robots."}
+{"translation": "We can't just say, \"We're going to the All-Counter tonight at 6:00,\" right?"}
+{"translation": "We usually go one step at a time to express our needs."}
+{"translation": "So, such an expression is actually very important for us to express our needs as a whole."}
+{"translation": "And then it's going to have to use a multi-wheel interactive technique like us."}
+{"translation": "You can look at this example."}
+{"translation": "\"Stand me a 10-person room in all of Judd.\""}
+{"translation": "And then in the process, it actually didn't say when he wanted to order it."}
+{"translation": "That's OK, it doesn't matter."}
+{"translation": "Our robot will automatically answer the question and say, \"What time do you want to book?\""}
+{"translation": "That's okay."}
+{"translation": "All we have to do is say, \"Oh, six o'clock tonight,\" and then we're done."}
+{"translation": "And beyond that, one of the needs for a simple extension on the platform is recommendation."}
+{"translation": "So, for example, can I say, \"Do you need another car for that time?\""}
+{"translation": "Okay."}
+{"translation": "We'll just have to get on top of it."}
+{"translation": "Then, naturally, it would recommend such a volume dialogue to you and then guide users to some more customizations."}
+{"translation": "So this and what is on the above page constitutes a capacity for a dialogue-oriented understanding of intent, of words, of which we were the first to offer at UNIT."}
+{"translation": "Then there is another situation, where we have a lot of friends who actually often do."}
+{"translation": "Which means I've actually collected a really big question-and-answer library like Question & Anwer."}
+{"translation": "Then again, we do not expect some precise intent to be built on each issue."}
+{"translation": "I'm just hoping that I'm putting this question-and-answer library in my system."}
+{"translation": "And then, when the user comes, one is a new query, and I want to know, for example, how to apply."}
+{"translation": "Then automatically we match some of the most semantic answers to his questions and recommend them to the users."}
+{"translation": "And then it's a smart conversation that goes directly to such a customer service category or a consulting category."}
+{"translation": "So that's a natural support for our UNIT, and that's one of the capabilities that we got online in the second phase, probably in September."}
+{"translation": "Well, then, as I just said, all you need to do is pour some information like Question & Anwer directly onto our platform."}
+{"translation": "And then, some of your related questions, some of the general questions you ask the user, come straight up, and it'll automatically go in here and search, and help us retrieve some of the most relevant results."}
+{"translation": "Similarly, a question-and-answer base in the category of a customer service actually requires multiple rounds."}
+{"translation": "Because when you use a user, sometimes he doesn't really know what he really needs."}
+{"translation": "For example, when the user first came, he just wanted to know how to borrow, and he didn't know what you had."}
+{"translation": "That's okay."}
+{"translation": "We actually need to go a little bit through multiple rounds to guide."}
+{"translation": "Such a dialogue would then be completed and a result would eventually be recommended to users."}
+{"translation": "And some of those capabilities, too, are available on our platform."}
+{"translation": "So you need to use our entire multi-round dialogue mechanism and our question-and-answer mechanism to simply put it together, and when you put it together, you can actually complete such a type of dialogue."}
+{"translation": "So what has just been mentioned is that the first two are some of the two types of capabilities that we offer in the face of such a scenario as a level-intellectual dialogue."}
+{"translation": "And then, actually, some of these capabilities are not just that we provide them in a static fashion, but that I can actually be defined on our own, through such a certain capacity of knowledge, interactive logic and model training in the field that we offer."}
+{"translation": "Then you can go and train some of the models you need for your own business."}
+{"translation": "And these models can actually do some of these customizations on this UNIT platform."}
+{"translation": "Well, while the UNIT platform was in fact just released in July of this year, in fact we have accumulated a very long time in the hundreds."}
+{"translation": "And so, uh, we're actually already in smart passenger clothes, assistants, homes, then cars, robots, so we all have some relevant accumulation on some of these scenes."}
+{"translation": "And then you can go, and I can give you two simple examples, and see what other problems we can solve."}
+{"translation": "Uh, a video, please."}
+{"translation": "Hello."}
+{"translation": "Ma'am, hello."}
+{"translation": "This is the Credit Card Services Center, number 1005."}
+{"translation": "Excuse me, do you have an innovative bank credit card in use?"}
+{"translation": "Nothing."}
+{"translation": "The caller simply informs you that the Innovation Bank has launched a platinum credit card free of charge for life."}
+{"translation": "The guarantee amounts to 20,000 to 100,000, and the country crosses borders and free deposites are free of charge."}
+{"translation": "Because it's also a platinum card. Do you have any other bank credit cards for more than six months?"}
+{"translation": "Are you employees of the bank?"}
+{"translation": "This call is mainly about the annual free platinum card of the Innovation Bank."}
+{"translation": "You will be contacted by the customer service manager of the Innovation Bank."}
+{"translation": "I'm stuck too much."}
+{"translation": "Ma'am, Cado says you're an old credit card user and you have good credit terms!"}
+{"translation": "Don't worry, I'm just introducing this card. It's not for you."}
+{"translation": "There are also a lot of activities to celebrate this anniversary."}
+{"translation": "You are specifically invited to participate."}
+{"translation": "Why don't you get it?"}
+{"translation": "Did you use the credit cards of other banks for more than six months?"}
+{"translation": "Well, there is."}
+{"translation": "That's for life."}
+{"translation": "Yeah."}
+{"translation": "If I had to, I'd go to the bank myself."}
+{"translation": "Ma'am, you're usually at work. The bank counter doesn't always work."}
+{"translation": "This will waste your precious time."}
+{"translation": "Isn't that convenient?"}
+{"translation": "Excuse me."}
+{"translation": "Do you have a steady job in Beijing?"}
+{"translation": "I don't have a job."}
+{"translation": "Oh, well, that's fine, as long as there's a fixed income and a solvency, and you can be identified by a fixed phone."}
+{"translation": "Do you have a regular monthly income?"}
+{"translation": "I'm retired."}
+{"translation": "Oh, excuse me."}
+{"translation": "Then I won't bother you."}
+{"translation": "Thank you for listening."}
+{"translation": "Have a good life."}
+{"translation": "Bye."}
+{"translation": "Well, that last one's still a failure."}
+{"translation": "But in fact, we really expect to show you one such capacity."}
+{"translation": "So this is one of our auxiliary sales systems."}
+{"translation": "Then the caller and the person who answered the phone were actually real people."}
+{"translation": "And then, but we often see a situation like this."}
+{"translation": "Which means that some of our sales are worth a lot of money and you probably don't know if you know a business like this."}
+{"translation": "That is to say that some of these sales are particularly good at doing some sales, and some of these sales, which are particularly appropriate at the right time, are not so many."}
+{"translation": "And most of the sales are actually, when he comes in, he needs a long training period, and he needs to learn what we should say under what circumstances."}
+{"translation": "And the cost and time of this training is really high."}
+{"translation": "But in practice, one such function is actually provided by a system such as ours."}
+{"translation": "That is, it actually doesn't need an in-depth training that we do too much on the phone, which dynamically takes into account these conversations between the two people, and then pops up some of the things that are best suited to say on this occasion."}
+{"translation": "And then this sale just needs to read it out."}
+{"translation": "This could in fact provide a great deal of success in increasing such a sale."}
+{"translation": "And then, actually, when we were on the 5th of July, we were actually supposed to be the same developer race that we announced as a 100-degree star."}
+{"translation": "And the whole platform behind such a big race is actually our UNIT platform."}
+{"translation": "And then in this game, we actually have a lot of more interesting ideas."}
+{"translation": "And this is an award-winning piece of our entire race."}
+{"translation": "And some of the students who actually developed this piece are actually some of the students of some of the upper secondary schools."}
+{"translation": "So you can come and take a look at this. Play the video, please."}
+{"translation": "Recommended recipes."}
+{"translation": "What kind of food do you want?"}
+{"translation": "We've screened out the recipes below."}
+{"translation": "The dragonfish."}
+{"translation": "How much time do you want to spend cooking?"}
+{"translation": "We've screened out the recipes below."}
+{"translation": "Half an hour."}
+{"translation": "Ready."}
+{"translation": "The third step is to cut small pieces of lobster fish with two spoons of wine, a little black pepper and salted salt for 20 minutes."}
+{"translation": "Give me ten minutes."}
+{"translation": "We'll alert you in 10 minutes."}
+{"translation": "Show me the picture!"}
+{"translation": "Next."}
+{"translation": "Done. When."}
+{"translation": "Well, you can see that this is a related technology that actually combines our voice recognition module and our entire UNIT."}
+{"translation": "Such a semantic technique, followed by a team of about two or three students and built a product like this."}
+{"translation": "And then it's very interesting."}
+{"translation": "And then we can go a little bit further, which is to say that some of the technologies in the front are actually backstages of what kind of core technologies we support."}
+{"translation": "First of all, we actually have the whole UNIT as a framework, which means that our developers just have to go up there to provide some of our targets and some of our training data, and then go into one of our whole learning."}
+{"translation": "Then we just need to listen, uh, through our quick entry into force, sustained optimization and some of those capabilities, and then we can make our entire data model."}
+{"translation": "And then a model like this could go straight up to the line and then give you such an interactive understanding service on the cloud."}
+{"translation": "And what's at the heart of this is actually the kind of technology that we understand and match."}
+{"translation": "We do not actually use just one set of technologies."}
+{"translation": "We have, in fact, many sets of technologies that work together, including our pre-positioned capacity, our ability to take effect quickly and our ability to learn on a continuous basis."}
+{"translation": "And these capabilities, if they are actually integrated, can provide some of these numerical functions that are very diverse in semantic understanding and generalization."}
+{"translation": "Well, that's some of our more central elements, for example, what our intention is to identify, that is, a model of the neural network."}
+{"translation": "It can be done under 2,000 or so words, and in the category of films and maps, we can be more than 80 per cent accurate."}
+{"translation": "And then our semantic matching, actually, doesn't require you to just customize and train."}
+{"translation": "I just need to put it in the big dictionary."}
+{"translation": "Then, on the basis of some of the relevant semantic matching technologies among us, we can say that we have a query map of the next user's natural language, which is, um, this one, on a standard question like this one."}
+{"translation": "And then, beyond that, data is actually a source of optimization for our entire model."}
+{"translation": "So, on our platform now, we provide two kinds of mechanisms."}
+{"translation": "One is the promotion of knowledge and the other is active learning."}
+{"translation": "More relevant questions can be extracted automatically from 100 degrees of big data, then recommended to you and then offered to model machines for learning."}
+{"translation": "And beyond that, we have some of the managerial capacities that are very rich in a dialogue process, including the intention to assemble, the intention to switch, the word slot to change, the clarification, the nesting, and so on."}
+{"translation": "And then there are some of our bridging rules and some of our mechanisms of state memory."}
+{"translation": "These are all offered on our UNIT platform."}
+{"translation": "Well, let's see where we're going."}
+{"translation": "Well, that means we were actually just released on July 5th."}
+{"translation": "And then, in the process, we actually have a few related technologies to upgrade and publish each month."}
+{"translation": "And by December, we should actually be that month, and our commercial deployment programme has actually been completed."}
+{"translation": "And we can be consulted about some of the deployed capabilities that are more stable in commercialization."}
+{"translation": "And then, we're backstage resource management API, and we're actually going to release it this month."}
+{"translation": "Besides, one of our chatting bots and some of our related presets will be released this month."}
+{"translation": "And then, next year, I can actually tell you a simple story about the 2.0 of our strategy, which will be completed by the beginning of the year."}
+{"translation": "And what's going to happen with this online?"}
+{"translation": "Very simple."}
+{"translation": "Well, I actually just got the effect of our final experiment yesterday."}
+{"translation": "About 100 data, put it in our model, and then one of our real online products is one such scene."}
+{"translation": "Let's assess its accuracy rate, which is more than 90 per cent and over 80 per cent recall."}
+{"translation": "100 data, that can be done."}
+{"translation": "And then this, we'll put it out for you at the beginning of the year."}
+{"translation": "There is, of course, more than that."}
+{"translation": "Some of our training structures, some of our data analysis and some of our ability to help you analyse user query, will all be open in due course next year."}
+{"translation": "So you're welcome to come and use it further, and then give us some more feedback, which would also be to promote further upgrading of our platform."}
+{"translation": "OK, let me show you the website, which is very simple, unit.baidu.com."}
+{"translation": "And, uh, you're welcome to use it, all right?"}
+{"translation": "Okay!"}
+{"translation": "And that's where I'm going with my speech today."}
+{"translation": "And then we have an excellent example of an orange interaction with 100-degree UNIT, an important partner of UNIT, Ms. CEO Lee Jiari."}

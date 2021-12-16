@@ -1,0 +1,113 @@
+{"translation": "We just talked about the application of 100 degrees of translation and how to use 100 degrees of API, so what's the technology behind that translation that you might be interested in?"}
+{"translation": "Now let's talk about the technology behind the 100-degree translation."}
+{"translation": "In fact, we have to mention that in 1946, the first computer in the world was born."}
+{"translation": "Because it's only when the computer has it that we can use it for translation."}
+{"translation": "In fact, there was a genius scientist who was wondering if we could use computers for translation."}
+{"translation": "In 1947, American scientists published a memorandum of translation that mentioned whether we could use computers for translation."}
+{"translation": "In practice, then, machine translation is a cross-disciplinary subject that requires the use not only of computer knowledge, but also of informatics, cognitive sciences, linguistics, etc."}
+{"translation": "So it's been almost 70 years from 47 to now, and a lot of machine-translations have emerged in those 70 years."}
+{"translation": "For example, in the beginning, rules-based machine translation, so-called rules-based translation, is that we get some human linguists to sum up language phenomena, write language rules, put them in computers, become computer-friendly languages, and translate."}
+{"translation": "It is clear from this approach that if we do multilingual translations, we need different linguists to write, so development costs are very high and later less used."}
+{"translation": "By the 1980s, evidence-based methods of translation had emerged."}
+{"translation": "The so-called example-based method of translation is to say that when we learn a language, we may not care very much about what syntax is in it."}
+{"translation": "So we're going to read a lot of readings to get a sense of the word, to express habits and phrases, and naturally there's such a physical model to create such a translation."}
+{"translation": "For example, there's a sentence that says, \"Please get me a glass of water,\" so there's a corresponding English translation."}
+{"translation": "So if we're going to translate another sentence, \"Please get me a pen,\" then as long as we replace the water with a pen and the corresponding English-language Uh Water with a pen, it's also relevant, so it's one of the main ideas for machine translation based on examples."}
+{"translation": "After the 1990s, IBM scientists came up with the idea of statistical machine translation, which has been, uh, a mainstream method of translation so far."}
+{"translation": "The so-called statistical machine translation is that we use a large amount of bilingual data to build a translation model, and then, by abstraction, we create a mathematical model that establishes a relationship between the language of origin and the language of the target."}
+{"translation": "Then, especially with the integration of the Internet, the translation of statistical machines has taken on great power."}
+{"translation": "This mainstream research trend continued until 2014."}
+{"translation": "The neural network machine translation method was introduced in 2014, which is the hotspot of a study to date, and there has been a significant improvement in the quality of translation as compared to that of a statistical machine."}
+{"translation": "What needs to be mentioned here is the rule-based era, where, uh, rules-based commercial translation software emerged in the mid- and late 1970s."}
+{"translation": "There was then a statistically based Internet translation system around 2006."}
+{"translation": "This represents a translation software for two different periods."}
+{"translation": "Then, by 2014, reference had just been made to the introduction of a neural network machine translation, which was a product of a laboratory, and there was still a long way to go if it were applied to industry."}
+{"translation": "In the case of statistical machine translation, for example, it was proposed around 1991, but the real large-scale Internet-based translation system went through 15 years in 2006."}
+{"translation": "How long has it been since 14 years since the neural network machine was translated from the lab to the industry?"}
+{"translation": "In less than a year, then 100 percent of the world's first neural network translation system."}
+{"translation": "Subsequently, in September 2016, companies such as Google launched their own neural network translation system."}
+{"translation": "Since the advent of the Internet, it has been mentioned that there is a large amount of available data on the Internet."}
+{"translation": "One of the big data that has been mentioned by many now, for example, is that we can tap hundreds of billions of pages of translated material from the Internet, as well as some authoritative dictionaries at the scale of tens of millions."}
+{"translation": "At the same time, a number of web-based verbs, popular language are emerging on the Internet, which need to be updated in a timely manner."}
+{"translation": "These three, uh, are bilingual materials, one is an authoritative dictionary, and there are some web-based verbs, popular languages, which make up our main, uh, training data for a translator."}
+{"translation": "On that basis, we obtained a high-quality knowledge base for translation through some tests to remove noise and new words."}
+{"translation": "The translation needs of the Internet are, in fact, diverse: we have the translation needs of poetry, the translation of papers, the translation of news, the need for patents, the need for chatting, etc."}
+{"translation": "It is clear that one translation system or model alone will not solve the problem, so 100 per cent translation is actually a multi-strategy translation system."}
+{"translation": "For example, we have both a rules-based approach and an example-based approach, as well as a statistical approach, and a neurological network-based translation method, which is now popular."}
+{"translation": "These methods of translation complement each other, take advantage of each other's strengths, respond to different translation needs and ultimately produce high-quality translation results."}
+{"translation": "Let me now briefly describe the advantages of these approaches separately."}
+{"translation": "Statistical machine translation, for example, was mentioned earlier as being based on extensive bilingual data training."}
+{"translation": "For example, in the top two frames, the left is a bilingual figure, the first is in Chinese, the second is in English, and we use the example of the Han-young to describe the translation of statistical machines, so it corresponds to one sentence to the other."}
+{"translation": "On the right is simple English, we call it monolingual data, on the left we call bilingual parallel data."}
+{"translation": "With some statistical analysis, we can create a translation model from the data on the left, for example, that my blue and red words can match."}
+{"translation": "Well, it's a phrase like, \"I'm going to tell,\" so English is I will tell, \"you\" can be translated into you, which can be done automatically."}
+{"translation": "In other words, with this bilingual text, we can build relations between the source and the target languages, so the translation model is more like a bridge."}
+{"translation": "So this one on the right is a language model that measures a fluidity of the target language after its creation."}
+{"translation": "We can say, for example, \"I am a student,\" which is a good expression, consistent with English."}
+{"translation": "But if you say \"I is a student\", it's a grammatical error."}
+{"translation": "The language model can tell that \u201cI am a model\u201d is more fluid than \u201cI is a model\u201d, and the former score is higher."}
+{"translation": "So through the translation model, it builds a bridge and a language model, it measures the flow of the target language, and we can translate it."}
+{"translation": "For example, I have a new sentence here: \u201cI want to tell you a story\u201d, which has never appeared in our training data, but we've seen these pieces."}
+{"translation": "For example, I will tell, you can be translated into \"you\", a translation into \"a\" and the story corresponds to \"story,\" so we can get a English translation of \"I will tell you a story\" through a combination."}
+{"translation": "But in the actual, uh, application scene, there are actually more complex strategies than this one."}
+{"translation": "For example, in Chinese, the order of sentences is usually not the same as in English, and there is a process of sequencing."}
+{"translation": "Also in the translation of statistical machines, we have just said that it is based on a large amount of training materials, such as Chinese and English, and we have a great deal of training data."}
+{"translation": "There are, however, a few very small minority languages, such as Chinese and Thai, Chinese and Japanese, Chinese and Korean, whose bilingual data are not very large or even very scarce."}
+{"translation": "So what do we do at this point in time? Do we still have to use the statistical machine for translation?"}
+{"translation": "The answer is also yes."}
+{"translation": "We have proposed a method of translation based on pivotal languages, the so-called pivotal languages, which we are, in general terms, introducing a third language as a bridge."}
+{"translation": "For example, we have a great deal of bilingual data in Chinese and English, as well as bilingual data in English and Thai, and we can each build a Chinese-English translation model and an English-Thai translation model."}
+{"translation": "This medium is used as a bridge between English and, by some modeling, we can build a translation model for Chinese and Thai, and thus also achieve a translation system for Chinese and Thai."}
+{"translation": "So, with such a technology, we can rapidly expand the translation from two languages, Chinese and English, to 28 languages and more."}
+{"translation": "The rule-based approach is briefly described below."}
+{"translation": "What's its strength?"}
+{"translation": "It's that we can easily come up with something regular so that we can apply it to the translation system."}
+{"translation": "Here are two examples."}
+{"translation": "In the first sentence, for example, my blue font is a date: 28 September 2015."}
+{"translation": "In Chinese, we usually say \"day\" and \"day\" in some Western countries, so we can adjust the chronology of Chinese to that of English."}
+{"translation": "The following example shows the translation of a number, for example 380, so we can easily write some rules on how to translate it into the right English."}
+{"translation": "So this is one of the advantages of a rule-based approach."}
+{"translation": "A case-by-case approach is presented below, where the translation that is usually good at it is a number of new words, proverbs, non-hot words and customary expressions."}
+{"translation": "It's usually something that we can't say a word for translation, and it's usually a translation of meaning."}
+{"translation": "For example, it's a more popular sentence of the previous two years, \"Do not die,\" so how do you flip it?"}
+{"translation": "It's obviously hard to flip."}
+{"translation": "Then someone summed up a method of translation, which, of course, was also recorded in a city dictionary in the United States."}
+{"translation": "It's hard to do with any kind of translation."}
+{"translation": "So let's put it in our training data."}
+{"translation": "If we find such a sentence, we'll simply translate it and, uh, show it to the user."}
+{"translation": "This is an example-based approach where the application should be humbly applied."}
+{"translation": "Finally, a neural network machine translator that has emerged in the last two years."}
+{"translation": "As in the case of statistical machine translations, you can see that the source language is actually cut into different segments, such as \u201cI want to tell\u201d and \u201cyou\u201d and so on."}
+{"translation": "As I mentioned earlier, when these segments are combined into translations, there will be some reordering of the sequence, as well as some cases where the context is not, uh, visible."}
+{"translation": "So in the neural network machine translation, it doesn't have these problems, it first encodes the source language as a whole, through the layers of the neural network and the abstractly final output of the translation."}
+{"translation": "It's like when people look at it in the translation process, we translate a sentence, usually read it first, get the whole message of the sentence and then translate it."}
+{"translation": "This allows us to make full use of the context of the sentence and the overall information, with the resulting translations being more complete and in order more in line with the order of expression in the target language."}
+{"translation": "So it's the neural network machine that translates it."}
+{"translation": "As I mentioned earlier, the neural network machine translation was actually just introduced in the laboratory in 2014."}
+{"translation": "After less than a year, on May 20th, 2015 and May 20th, it was a very good day, 520, that we launched the world's first Internet neural network machine translation system, called NMT, N means Neural, which opened a translation scene for large-scale NMT applications and opened a new chapter for large-scale NMT applications."}
+{"translation": "Well, as you know, in September 2016, Google also released its own NMT system."}
+{"translation": "Well, from September 2016 to the present, machine translation based on the neural network has been a research hot spot and an application of, uh, a hot spot."}
+{"translation": "In practice, however, we often encounter some difficulties when referring to a study from a laboratory to an industrial application."}
+{"translation": "For example, in the case of machine-statistical translation, when it was just introduced in 91, everyone was limited to the language, machine, model, realization, etc."}
+{"translation": "Only in 2006, after 15 years, did the world's first Internet-based system of methodological translation become available."}
+{"translation": "So, after the neural network translation method was presented, we studied it in depth in terms of efficiency, data, models, etc., and proposed a series of improvements that could be quickly applied to our translation."}
+{"translation": "So here's a simple list of us that we've come up with some very effective and innovative ways to do this."}
+{"translation": "These methods are published at our highest international conferences in this field like ACL, Triple AI, etc."}
+{"translation": "If you're interested, you can take a look."}
+{"translation": "Here, I will simply use one of these as an example to introduce you."}
+{"translation": "This is the NMT system that we introduced in 2015 based on multitasking learning, which addresses a problem, as well as the translation of a small language that has just been mentioned."}
+{"translation": "For example, we have a large amount of data in Chinese and English, but we have very few data in Central Thailand, China and Japan, and China and Korea."}
+{"translation": "So can we come up with a way, because the Chinese are all connected, and we're all sharing an encoder at the Chinese end, and we're using different decoders at different target ends."}
+{"translation": "At the end of Chinese, at the end of source language, we all share an encoder."}
+{"translation": "At the end of the target language, each target language corresponds to one of its own decoder, thus creating a multiplicity of translations."}
+{"translation": "We can translate Chinese into English, Korean, Thai, Japanese, etc. at the same time."}
+{"translation": "So the work was later evaluated by the New York Times as a Pathbreaking paper, a landmark article that was widely cited and used."}
+{"translation": "In the same vein, in 2015 we also introduced a number of mobile-end translations, i.e., cellular-ends."}
+{"translation": "So, for example, when you travel, you often encounter a lack of access to the Internet or too much money, and if you download our offline packages, you can also use our NMT system to obtain high-quality translation services."}
+{"translation": "So at the end of the cell phone, the storage and computational resources of the cell phone, we need to do some extra work to make this model work."}
+{"translation": "For example, we first compressed this model 70 times, so it only needs 30 megagrams of memory to run smoothly at the end of the cell phone."}
+{"translation": "Ah, we have some dynamic-loaded algorithms, and so on."}
+{"translation": "With some of these optimizations, we can easily access our NMT system on the cellular end and now support the Chinese, English, Japanese and Korean languages."}
+{"translation": "The technology of 100-degree translation was widely recognized by expert scholars, for example in 2014 by the Chinese Electronics Institute's first prize for scientific and technological progress, and in 2015 by the State's second prize for scientific and technological progress."}
+{"translation": "The list below is a list of our scholarly papers that you can search online and download if you are interested."}
+{"translation": "Thank you."}

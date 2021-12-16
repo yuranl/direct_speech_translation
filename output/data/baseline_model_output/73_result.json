@@ -1,0 +1,222 @@
+{"translation": "Hello everyone"}
+{"translation": "Today, I will introduce you to the Rogue Fort system time"}
+{"translation": "Is a product of Baidu"}
+{"translation": "The themes of the catalog I introduced today will be divided into four main areas"}
+{"translation": "One is to introduce our grandmother Baidu&#39;s background"}
+{"translation": "Another is that the scene I used has been analyzed by several cases so that when you can refer to the industry"}
+{"translation": "Then there is a brief introduction to the key features of our manager structure."}
+{"translation": "First of all, let me introduce you to the shoot"}
+{"translation": "The origin of the name of apollo is due to the blood of the Laip computer, but it does not form the archway."}
+{"translation": "apollo is a mpp based is an interactive one supports Sogou Sogou query that input library"}
+{"translation": "Then it is oriented to 100 TB to PB level and then mainly structured data. Then we support a response from milliseconds to seconds."}
+{"translation": "Then he did not come to research and develop because of Uncle Baidu, and it has a wide range of applications inside Baidu."}
+{"translation": "Then, if it is deployed internally, the largest business with more than 1,000 machines may already have 100 terabytes of attractions on your site."}
+{"translation": "First of all, we may hear more about rtp"}
+{"translation": "When will you come"}
+{"translation": "Opposite, as the name implies, is like online analysis and processing, seeking a concept one by one"}
+{"translation": "Then there is a table below which is a distinction between rtp and rp"}
+{"translation": "Take a closer look"}
+{"translation": "Then first of all, from an application-oriented perspective, TP is mainly for the processing of some daily transactions. Then my skin is for some scenarios that are more technically powerful, such as query analysis and decision-making."}
+{"translation": "Then I visited the magic like, then rtp, but some batches of small queries, and then the online App is a more consistent aggregation of these scenes, such as drilling down the cliff."}
+{"translation": "Then from the perspective of data volume, TP is generally a relatively small amount of data. Its order is to access the latest data, but the amount of data accessed by TPP is relatively large."}
+{"translation": "There are multiple versions of Orlando because it has some historical data. It needs to be restored. The history does need to be analyzed."}
+{"translation": "Then, in terms of data update and data organization, TP is generally focused on time and time."}
+{"translation": "Then he said that the form of the group is mainly the requirements of some paradigms in the database field"}
+{"translation": "Then ofo may mainly be some batch updates"}
+{"translation": "The strategic needs for his single football update are very, very few"}
+{"translation": "Then some of his output authors wrote about males, mainly some including information models, and these assisted models for those who analyze the scene"}
+{"translation": "The difference between online Haohaofan mainly focuses on a response time"}
+{"translation": "More emphasis is on the result of fast consumption and payment"}
+{"translation": "Offline For example, when there are some reactionary analysis work, it does not emphasize the response time so much."}
+{"translation": "Now let\u2019s take a look at some commonly used systems in the night."}
+{"translation": "Here are some of them a long time ago. Whether I come to the building or not is just monopolized by some commercial companies."}
+{"translation": "In recent years, with the development of big data technology, especially the development of many communities, it can be seen that some open source products have appeared."}
+{"translation": "Then there are some from me and Yuan"}
+{"translation": "Google and Amazon have produced a round of external products"}
+{"translation": "payload is a product"}
+{"translation": "Then, some of his basic positioning. Here are some positionings that are more betrayed by our design at the time."}
+{"translation": "First, open a product that is always a product, and then it can be linearly expanded"}
+{"translation": "Chemical deployment"}
+{"translation": "In fact, we took the picture. It is already online on Baidu Open Cloud. If you are even some users outside the company, you can try it if you want to go smoothly."}
+{"translation": "There is also the high-availability of the auction house, and its high-performance and its performance. Our design goal should be 100,000 qps."}
+{"translation": "Every scan per second should be 100 forbidden, which is an order of magnitude for the entire cluster"}
+{"translation": "Then we want to import the speed and the maximum speed of the entire cluster that can reach 27 meters per hour."}
+{"translation": "After introducing the background of the filming, let\u2019s introduce some of Pan Lu\u2019s use of some scenes, and some of our internal cases in Baidu. There are some internal product lines. You can refer to a typical case in our country."}
+{"translation": "It\u2019s not to see if you have some similar scenes. If you need it, you can consider using Pailong"}
+{"translation": "The main thing in life scenarios is to perform statistical analysis on data."}
+{"translation": "Then in detail, there may be two major scenarios"}
+{"translation": "You always say that there is another kind of report that is my multi-dimensional analysis"}
+{"translation": "So how did everyone do our product line before you took such a product?"}
+{"translation": "Waiting for a report, it may say that it only takes a timed task and then runs it regularly every day. After that, the final result is the final result and then imported white and heavy."}
+{"translation": "Why is this the final result?"}
+{"translation": "Because I have problems when dealing with large amounts of data. There are some performance considerations that are not up to the requirements, and then it has to pour the final result."}
+{"translation": "Then there are some that are possible after the result is finally obtained, then the user will query the user and then the most library will send an email or some other way to show the result."}
+{"translation": "But there is a problem"}
+{"translation": "No matter if you do timed tasks, you can go. There is another one, but you keep the final result from early to night. In your life, you will generate many tasks and it is easy to generate many tables in the purchase of creatures. These tasks and table maintenance costs Is very high"}
+{"translation": "And performance and efficiency may indeed not meet the requirements many times"}
+{"translation": "Chen Hong will just do it"}
+{"translation": "Then I analyzed it more. It was what we identified and supported, and there is no shortage of harming me to take some scenes."}
+{"translation": "If but if you consider the realization, there may be some archways that can be considered"}
+{"translation": "The following is the main force used to write some product lines inside Baidu."}
+{"translation": "First of all, the first brain is Baidu&#39;s statistics. They are used in report distribution."}
+{"translation": "This makes her first. What is Baidu Statistics?"}
+{"translation": "Everyone may be clearer"}
+{"translation": "He is a professional website analysis tool provided by Baidu"}
+{"translation": "What kind of scene is it in this scene?"}
+{"translation": "Pour once in five points and there are more than 300 watches"}
+{"translation": "The maximum amount of data on the day is about 1tb more than one, and then the qps of the query is the highest peak value per second to 2000"}
+{"translation": "Then, when we migrated from others to pyro before we used it, we changed from more than 220 machines to more than 50 of ours."}
+{"translation": "Then the response time of the plane has changed from 60 milliseconds before to 30 milliseconds afterwards."}
+{"translation": "This page is actually a screenshot of the report that Baidu stats a single interface on the pad."}
+{"translation": "The rough meaning is to say that every day, from left to left, he also customizes some indicators of some pavi and some traffic analysis."}
+{"translation": "Later, as long as you switch, you will feel that these reports will be generated regularly every day"}
+{"translation": "Next, this is one of our applications in the field of multi-dimensional analysis is Baidu Waimai"}
+{"translation": "Baidu Waimai has his own data platform. It can use the one we photographed."}
+{"translation": "Then he is also more familiar with his classmates to analyze orders and business sales staff."}
+{"translation": "Then his characteristics still say that my dimensions can be customized"}
+{"translation": "My love is like this. This is a typical scene with more analysis."}
+{"translation": "Then you can arbitrarily specify the dimensions through you. You specify those dimensions and then you can generate the results of this analysis in real time."}
+{"translation": "It\u2019s very helpful to make decisions with the faces of classmates on them."}
+{"translation": "Then the next one is a glutinous rice. The glutinous rice is ours. The inside of their glutinous rice is immediately the head of the product. It is also useful for our rehearsal balls."}
+{"translation": "Then it contains more requirements for reports and some reports, and some requirements for analysis."}
+{"translation": "Then he switched us from the previous minute level to our second level before using us"}
+{"translation": "This is our introduction to some typical cases where there are scenes and some uses"}
+{"translation": "Then the next one. If it is in the future, if the students have your needs, you can consider whether you can use the row."}
+{"translation": "Then, let\u2019s briefly introduce some of the overall architecture and some of the key technical features."}
+{"translation": "In this way, when everyone can use us, they can consider something to us. First of all, understand first and use us better."}
+{"translation": "First, I took a picture of the overall structure. For the upper-level users, we just need him to have experience in the smog society before they can come to simple food. We, we, because we support the agreement to buy and buy."}
+{"translation": "Then we are shooting, that is not divided into two to two percent with patellar fluid"}
+{"translation": "Let him be responsible for some metadata institute queries, analysis, analysis, pressure, and execution planning. This task is scheduled to complete these aspects."}
+{"translation": "The mutated card means that the sharding of the data is responsible for the execution of our specific restrictive query and the specific scanning of the data. These are completed by the be two."}
+{"translation": "What we want to say in this is that we have multiple IPs. Our consideration is to define that we support high availability of metadata."}
+{"translation": "Between any self-confessed a lot of playing minus one"}
+{"translation": "We use the content protocol to achieve a high availability of restored data"}
+{"translation": "And that is to say, when our pressure is relatively high, the performance can be evaluated, we can be level linear, and we can improve the high availability of our FB through the level of linear expansion."}
+{"translation": "This is just a brief introduction to our home is better"}
+{"translation": "Detailed entry, now we have the opportunity to communicate in detail in the future"}
+{"translation": "Then, let\u2019s come together and briefly introduce some of the characteristics of some of the technologies we took."}
+{"translation": "For users, we only need to feel the experience so that we can because we support the purchase agreement"}
+{"translation": "This is if there are a few more advantages to buying life insurance"}
+{"translation": "It means learning school is very low for users"}
+{"translation": "Then, we are also very easy to be compatible with upper-level applications, for example, the user&#39;s program has nodes bc E and DBC to access us. It is easy and indeed compatible."}
+{"translation": "Switching area means that the cost of user switching is very low. The cost of switching to the original system is very low."}
+{"translation": "Then it&#39;s okay. Now we can easily dock some other tools that are very commonly used in the market. Then it is not as good as jeans, like qlik, which can be easily docked."}
+{"translation": "Then we can directly use some uncomfortable related peripheral tools"}
+{"translation": "Regarding the use of fat, some knowledge after the acquisition agreement is full, a person who has the experience of buying three mouths can easily use the archway."}
+{"translation": "Hello, you have to play the acquisition, specify the machine port and then the user password can contact us to shoot"}
+{"translation": "When the user sees 10 on the client, right? Sogou is connected to the future life. If you want to be a little bit, don\u2019t think we are a server full of life."}
+{"translation": "Then it\u2019s so cool. I\u2019ll gradually buy some saliva for the list of statements."}
+{"translation": "Then the following is the core of this meat and another is the progress query of some import income of our road"}
+{"translation": "Then the person at the bottom is a select three-port query. These are basically the same as the effect."}
+{"translation": "Parallel database. For a large-scale database of my live Photos, first of all, we may want to emphasize our high availability."}
+{"translation": "The first one mentioned to the person before how our metadata is highly available between C is a protocol to maintain the content"}
+{"translation": "Then in terms of data, we do what you do with high availability"}
+{"translation": "The first is to say that our data has multiple copies, and then we can achieve automatic supplementation and system balance between the copies."}
+{"translation": "The following is a freehand introduction to some of the metadata of F1, which is a high-profile and highly available metadata in the MV."}
+{"translation": "To us but don&#39;t want to expand now"}
+{"translation": "Then I will introduce a very typical and very important data model in the recording. You must pay attention to this when you have a film."}
+{"translation": "For example, if I don\u2019t have such a picture that says that we have 5 columns of countries with time I, then click and consume."}
+{"translation": "Then I was filming it. It\u2019s from the district distribution united outside the nostalgia"}
+{"translation": "In the first three columns, there is a K grin and on both sides is a durian"}
+{"translation": "Then first send all the keys listed in the photo, and your underlying storage is in order. This orderly benefit brings me that I can quickly locate and find this case, so everyone should understand it."}
+{"translation": "Then all K columns are unique in the internal storage"}
+{"translation": "If multiple batches of thermal conductivity data are cracked, if Xiao Tong bought it, it will be automatically aggregated."}
+{"translation": "Each external link of Pellet and Outflow Chain can mean that each extra nostalgia can specify an aggregation method, and the same buying durian will be automatically aggregated."}
+{"translation": "Then here is an example. For example, the data of one day and one day may be imported more than 280 times in one day because one batch is poured into five points."}
+{"translation": "Then 2280, if you don\u2019t do aggregation, at least the same individual will produce at least 280 data"}
+{"translation": "Then when you analyze and aggregate, you need to go back and output 280 from time to time."}
+{"translation": "But when you take the shot, we will have already put your 28th head in advance when you are down. The speed at which you are asked to query and search will be very efficient."}
+{"translation": "Let\u2019s create a more detailed scenario. Suppose we have such a basic data represented by a quilt. There are three pieces of data in the performance."}
+{"translation": "Then we used to export a batch of data and import it into this end, we become a turret"}
+{"translation": "Then these important data"}
+{"translation": "His and the previous same key will merge different ones, you can understand"}
+{"translation": "Then, in this case, there are still 4 pieces of data in such a result."}
+{"translation": "The former nostalgia for men because of its aggregation method is a way of summing up"}
+{"translation": "What would he do to drink"}
+{"translation": "There is also a chain opened in the internal storage engine. There is another feature that says that our daily food view"}
+{"translation": "For example, to the left to the left to indicate the original data of our basic data"}
+{"translation": "Then let you import it and we will generate a metal table"}
+{"translation": "Then I said earlier that my photos are sorted by key, so his order will change a little."}
+{"translation": "But if we add that we need such a scene that is the user, his query only contains the face of love here and his pvp is not concerned about time splitting and god splitting. At this time, we can borrow a picture to be a disciple and reduce it. Column of"}
+{"translation": "For example, we claim that there are only IP and pv in such a carton table."}
+{"translation": "When the user comes to inquire, if he does not need to use the time to associate the province, even we can directly go for a drink and go to the lady so the speed will increase."}
+{"translation": "Of course he has a shortcoming"}
+{"translation": "This is what you do. After the baby is generated more, it needs to occupy more of the data space that affects part of the data."}
+{"translation": "If we have a little trade-off in the production environment, it\u2019s better"}
+{"translation": "One more sentence, he will add that this materialized view is automatically updated when you import it, and then automatically positioned and automatically selected when you query. This does not require the user to perform any additional probabilities."}
+{"translation": "Here are some other important features of panel storage"}
+{"translation": "First of all, we are the knowledge transmission, of course, we also support good storage and we also real memory"}
+{"translation": "What can be the benefit of refining"}
+{"translation": "The first one is that when you query, if you only include some of the columns but not all the columns, because the columns are stored, the data of each column is stored separately, so it will be small if you need to scan the description."}
+{"translation": "In addition, when you put the data in each column together and the data format of each column is the same, it is convenient for us to compress when storing data, which reduces the storage space occupied by the amount of stored data."}
+{"translation": "Paccarus is a real two-layer partition"}
+{"translation": "Then what is a partition?"}
+{"translation": "This is for a large-scale processing system that will definitely distribute the data on multiple machines."}
+{"translation": "There will be two partitions"}
+{"translation": "Compared with the traditional one-level partition, what is our advantage?"}
+{"translation": "First of all, the two-layer partition of our Polo can easily isolate the old and the new academy."}
+{"translation": "If we divide the new and new points, for example, in the first level partition, we use the time dimension to separate the data. In this way, new and new data will be imported into a new distracted first-level partition and then old. Data will stay in grandma&#39;s partition"}
+{"translation": "Then he reduced a lot of historical data and made some unnecessary merges when storing our back-end program memory to reduce some of our underlying overheads."}
+{"translation": "There is an expansion that simplifies the table"}
+{"translation": "How to say this"}
+{"translation": "For example, we have a commonly used hash partition on the first floor of the hot spring. If the number continued to increase in the past year, you would not hesitate to each one of you stabbed a hash partition and the amount of data continued to increase. When processing, you want to reduce the amount of each of your same data, then you can only increase the number of your partitions"}
+{"translation": "But for a kid, if you need to go, then you need to re-separate. You need this everyone is very high because you need to recalculate all the data."}
+{"translation": "In the two-row partition, it doesn\u2019t need it. When the amount of data continues to increase, I just need to create a new analysis when the episode is sprayed. Adjust the hash bucket based on the internal two-layer analysis. Just count"}
+{"translation": "Such a closing sentence in Xiamen is an example of our two-level partition"}
+{"translation": "Going to you to see him in the dimension of time, he carried out a 17-layer bank partition, and then under each layer, he solved the hash partition and divided 32 heads."}
+{"translation": "An example syntax example of a two-level partition"}
+{"translation": "Then it also supports a concept of hierarchical storage"}
+{"translation": "What is the concept of hierarchical storage?"}
+{"translation": "Let\u2019s say, for example, our servers now coexist with SSDs and home hard drives."}
+{"translation": "On the one hand, we still want to take advantage of the high performance of SSD. On the other hand, because the capacity is still relatively small, we have to be afraid of the environment."}
+{"translation": "But on the other hand, from the perspective of 6 out of our queries, because the data can be divided into new data and mouse drama, the probability of new data being queried is much higher than that of old branches."}
+{"translation": "Then we can put the new data on the SSD and always put it on the keyboard"}
+{"translation": "But if our labor is going to move the data, it will be very high."}
+{"translation": "Hello, it supports automatic migration and movement of these data in SSD and front row time"}
+{"translation": "Next, let\u2019s talk about the execution aspect, how to be happy and some special cases."}
+{"translation": "First of all, what we mentioned before is that Hello is an execution engine of mpp"}
+{"translation": "What product"}
+{"translation": "An acronym for massively parallel processing"}
+{"translation": "This is the core of the 60 happy things that we are actually Ashipan"}
+{"translation": "On the other hand, we are performing support vectorization"}
+{"translation": "This is actually a very low-level oil painting when his vector is still executed"}
+{"translation": "It has reduced some, mainly because it reduces the consumption of some chips, etc. Some pipelines are better, and branch predictions are better."}
+{"translation": "Well, there is another one that is to say that we are for one because we are distributed knowledge and then we took a picture and also supported a commonly used wooden thought"}
+{"translation": "For me, when sorting large-scale and large amounts of data, we perform a merge sort between multiple nodes."}
+{"translation": "Then, the sorting is more wild and the performance is better."}
+{"translation": "Then there is also the sorting of some tools and aunts in some big countries, and if your data volume is very large, it becomes uncertain. At this time, we support the placement of these data."}
+{"translation": "Then when our execution and storage are very good"}
+{"translation": "One problem we often encounter is that when multiple users use the same cluster, their queries affect each other."}
+{"translation": "There are different queries or different for the same user, and the gap between the import and the query and the query are mutually affected."}
+{"translation": "Why"}
+{"translation": "Because the resources of the system are limited"}
+{"translation": "He sent a very big query but other products may be affected"}
+{"translation": "At this time, what we are talking about is to provide a complete set of resource isolation solutions to solve this problem."}
+{"translation": "To put it simply, we support setting a certain priority for the job and then fall alone"}
+{"translation": "Then ensure that they will not say between different queries because you have a very large query that takes away the resources of other queries, and then the identified product cannot be executed."}
+{"translation": "Then we can\u2019t implement cgroups"}
+{"translation": "Such a reasonable and detailed plan. We are still optimizing the latest version. At present, we are on the cloud. We will go abroad. The next version of the Legislative Council is better."}
+{"translation": "I won&#39;t go into details here"}
+{"translation": "Xiamen is a brief introduction to us"}
+{"translation": "Then for the following introduction, I took an import and export function"}
+{"translation": "We now support a variety of import methods, such as your data, no matter where you put the data, for example, if you put it in it, it\u2019s not enough."}
+{"translation": "All of us can support the cause this is now imported into their system"}
+{"translation": "Then for the household scene, that is, the user, we also support a multi-meter importing sodium atom zodiac"}
+{"translation": "I heard that the relative bezel of your atom is poured in. At this time, the user often meets this requirement in business, which can ensure that he is able to achieve this atomicity."}
+{"translation": "Then exported us and imported it is similar"}
+{"translation": "It also supports an export of multiple data sources and destinations. It supports a lot of storage and storage."}
+{"translation": "Then I introduced some scenes in which I said that Photograph is an iOS App, which is partial to report analysis."}
+{"translation": "In Macau, we also provide some of the stronger ones on Sogou for the scenes that called you to analyze, right? Some enhancements."}
+{"translation": "First of all, we support what we need to say. It\u2019s worth mentioning that we are Mr. Pan and support Trump, who also said that this person with analytical experience may feel that the gains will fall sharply, saying that you can charge things up when you calculate or your calculations. The ranking of Astro Boy is very high in terms of pictures, but the belly becomes very simple and efficient."}
+{"translation": "Then, for example, let\u2019s take an example. If the three people with the highest signing in the same department have not passed through the function, this is very difficult to achieve."}
+{"translation": ""}
+{"translation": "In addition, our future is to improve an application system for users"}
+{"translation": "We just buy on the client side and then buy the side. You can easily make user adjustments. View our help documents. You don\u2019t need to say. You only need to contact our server. You can easily view it with the server that completes the client linkage. Help information"}
+{"translation": "It\u2019s the same as the reflection back in Hanfu and so on."}
+{"translation": "I said you want to check the import help reveal"}
+{"translation": "This reduces the need for users to switch between different Baoluwenxing document help pages. These pages are very ghostly. When you use money, it will be very user-friendly and friendly."}
+{"translation": "Here is a brief introduction to the content of Hello"}
+{"translation": "The following are some of our open ones that we have now are some of our contact us contact information"}
+{"translation": "First ask this Baidu Open, so the payload has been logged on to Baidu Baidu Open Cloud, and then this internal connection, you can learn more about some of our products and functions by creating the above."}
+{"translation": "He can email us if he has any questions"}
+{"translation": "thanks"}
