@@ -17,64 +17,36 @@ from datasets import load_dataset, load_metric
 import torch
 import torch.nn as nn
 import numpy as np
-import math, json
+import math
 import torch.optim as optim
-import os
-
-os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 
 class asr_translation_model(nn.Module):
     def __init__(self):
         super(asr_translation_model, self).__init__()
         self.asr_model = Wav2Vec2ForCTC.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
-        self.conv1 = nn.Conv1d(21128, 64, 4, 2,bias=True)
-        self.relu = nn.ReLU()
-        self.conv2 = nn.Conv1d(64, 128, 4, 2,bias=True)
-        self.conv3 = nn.Conv1d(128, 256, 4, 2,bias=True)
-        self.conv4 = nn.Conv1d(256, 512, 4, 2,bias=True)
-        self.mask_conv = nn.Conv1d(512, 1, 1, 1,bias=True)
-        self.sigmoid = nn.Sigmoid()
-        # self.translation_model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-zh-en")
-        self.translation_model = AutoModelForSeq2SeqLM.from_pretrained("./finetuned_model/1213 wd0002/3")
+
 
     def forward(self, batch):
         del batch['input_ids']
         del batch['attention_mask']
-        logits = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
-        translation_input = self.conv4(self.relu(self.conv3(self.relu(self.conv2(self.relu(self.conv1(logits.transpose(1, 2))))))))
-        # translation_input = self.conv1(logits.transpose(1, 2))
-        # translation_input = self.relu(translation_input)
-        learned_mask = self.sigmoid(self.mask_conv(translation_input))
-        translation_input = translation_input * learned_mask
-        length = translation_input.shape[2]
-        batch_size = translation_input.shape[0]
-        new_attention_mask = torch.ones(batch_size,length, device=translation_input.device)
-        # if length > 200:
-        #     print(length)
-        # attention_mask2 = torch.where(learned_mask > 0.5, 1, 0).squeeze(0)
-        outputs = self.translation_model(inputs_embeds=translation_input.transpose(1,2), attention_mask = new_attention_mask, labels=batch.labels)
+        outputs = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
+        # translation_input = self.conv2(self.relu(self.conv1(logits.transpose(1, 2))))
+        length = outputs.shape[2]
+        batch_size = outputs.shape[0]
+        new_attention_mask = torch.ones(batch_size, length, device=outputs.device)
         return outputs
 
     def generate(self, batch, max_length=512):
         del batch['input_ids']
         del batch['attention_mask']
-        logits = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
-        # translation_input = self.conv1(logits.transpose(1, 2))
-        # translation_input = self.relu(translation_input)
-        # translation_input = self.conv2(translation_input)
-        translation_input = self.conv4(self.relu(self.conv3(self.relu(self.conv2(self.relu(self.conv1(logits.transpose(1, 2))))))))
-        learned_mask = self.sigmoid(self.mask_conv(translation_input))
-        translation_input = translation_input * learned_mask
-        length = translation_input.shape[2]
-        batch_size = translation_input.shape[0]
-        new_attention_mask = torch.ones(batch_size,length, device=translation_input.device)
-        # attention_mask2 = torch.where(learned_mask > 0.5, 1, 0).squeeze(0)
-        encoder_output = self.translation_model.get_encoder()(inputs_embeds=translation_input.transpose(1,2),attention_mask = new_attention_mask)
-        generated_tokens = self.translation_model.generate(encoder_outputs = encoder_output, attention_mask = new_attention_mask, max_length = max_length)
+        outputs = self.asr_model(batch['audio_inputs'], attention_mask=batch['audio_inputs_mask']).logits
+        length = outputs.shape[2]
+        batch_size = outputs.shape[0]
+        new_attention_mask = torch.ones(batch_size,length, device=outputs.device)
         return generated_tokens
 
 
-split_datasets  = load_dataset('json', data_files={'train': './MT_data/train/*.json', 'validation': './MT_data/dev/*.json'})
+split_datasets  = load_dataset('json', data_files={'train': './transcription_translation/6.json', 'validation': './translation_validation/102371.json'})
 # DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 processor = Wav2Vec2Processor.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
 
@@ -95,7 +67,7 @@ def postprocess(predictions, labels):
     for i in range(len(decoded_labels)):
         if (decoded_labels[i] == ['']):
             decoded_labels[i] = ['This sentence was corrupted. Developer notes']
-            #print(labels[i])
+            print(labels[i])
     return decoded_preds, decoded_labels
 
 def preprocess_function(examples):
@@ -115,10 +87,10 @@ def preprocess_function(examples):
     wav_files_unique = list(set(wav_files))
     wav_dic = {}
     for i in range(len(wav_files_unique)):
-        speech_array, sampling_rate = torchaudio.load('./MT_data/audios_train_dev/' + str(wav_files_unique[i]) + '.wav')
+        speech_array, sampling_rate = torchaudio.load('./data_source/audio_train/' + str(wav_files_unique[i]) + '.wav')
         resampler = torchaudio.transforms.Resample(sampling_rate, 16000)
         speech = resampler(speech_array.squeeze(0)).numpy()
-        #print(speech.shape)
+        print(speech.shape)
         wav_dic[str(wav_files_unique[i])] = speech
     batch_speech_sample = []
     for i in range(len(wav_files)):
@@ -181,10 +153,7 @@ for wdecay in [0.0002]:
     # asr_model = Wav2Vec2ForCTC.from_pretrained("ydshieh/wav2vec2-large-xlsr-53-chinese-zh-cn-gpt")
 
     data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
-    # translation = pipeline("translation_chinese_to_english", model=model, tokenizer=tokenizer)
-    # text = "我不知道我在干嘛, 这句话是用来测试的"
-    # translated_text = translation(text, max_length=40)[0]['translation_text']
-    # print(translated_text)
+
     max_input_length = 128
     max_target_length = 128
 
@@ -195,7 +164,7 @@ for wdecay in [0.0002]:
     )
     train_dataloader = DataLoader(
         tokenized_datasets["train"],
-        shuffle=True,
+        shuffle=False,
         collate_fn=data_collator,
         batch_size=1,
     )
@@ -205,19 +174,14 @@ for wdecay in [0.0002]:
         batch_size=1
     )
 
-
-
-    print("weight decay: " + str(wdecay))
-    # optimizer = AdamW(model.parameters(), lr=2e-5, weight_decay=wdecay)
-    optimizer = optim.SGD(model.parameters(), lr=2e-3)
+    optimizer = optim.SGD(model.parameters(), lr=2e-4)
     accelerator = Accelerator()
     model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
         model, optimizer, train_dataloader, eval_dataloader
     )
     metric = load_metric("sacrebleu")
-    #metric = BLEU
 
-    num_train_epochs = 3
+    num_train_epochs = 8
     accum_iter = 16
     num_update_steps_per_epoch = math.ceil(len(train_dataloader) / accum_iter)
     num_training_steps = num_train_epochs * num_update_steps_per_epoch
@@ -240,20 +204,14 @@ for wdecay in [0.0002]:
         num_training_steps=num_training_steps,
         num_cycles=6
     )
-    # print(lr_scheduler)
-    # print(wu_scheduler)
-
-    # pretrained_performance()
     
     progress_bar = tqdm(range(num_training_steps))
     loss_train = []
     loss_eval = []
     for param in model.asr_model.parameters():
         param.requires_grad = False
-    for param in model.translation_model.parameters():
+    for param in model.translation_model.get_decoder().parameters():
         param.requires_grad = False
-
-    # scaler = torch.cuda.amp.GradScaler()
 
     for epoch in range(num_train_epochs):
         # Training
@@ -261,21 +219,11 @@ for wdecay in [0.0002]:
         loss_cumu = 0
 
         i = 0
-        if epoch == 1:
-            for param in model.translation_model.get_encoder().parameters():
-                param.requires_grad = True
-        if epoch == 2:
-            for param in model.translation_model.get_decoder().parameters():
-                param.requires_grad = True
+        
         for batch_idx, batch in enumerate(train_dataloader):
             with torch.set_grad_enabled(True):
                 outputs = model(batch)
-                # with torch.cuda.amp.autocast():
                 loss = outputs.loss
-
-                # accelerator.backward(scaler.scale(loss))
-                # scaler.step(optimizer)
-                # scaler.update()
                 loss = loss / accum_iter
                 accelerator.backward(loss)
 
@@ -285,12 +233,7 @@ for wdecay in [0.0002]:
                     cosine_scheduler.step()
                     progress_bar.update(1)
                     i += 1
-            
-            # lr_scheduler.step()
-            # wu_scheduler.step()
-
-
-                
+                   
                 loss_cumu += float(loss.item())
 
         loss_cumu /= i
@@ -312,7 +255,7 @@ for wdecay in [0.0002]:
         loss_eval.append(loss_eval_cumu)
         print(f"epoch {epoch + 1}, Validation Loss: {loss_eval_cumu:.2f}")
 
-        if epoch in [0, 1, 2, 3, 4, 7, 16, 24]:
+        if epoch in [0, 1, 2, 3, 4, 7]:
             model.eval()
 
             # Training BLEU
@@ -364,23 +307,16 @@ for wdecay in [0.0002]:
                 decoded_preds, decoded_labels = postprocess(predictions_gathered, labels_gathered)
                 metric.add_batch(predictions=decoded_preds, references=decoded_labels)
 
-                #f = open("connected_model_" + epoch + "_" + train_batch_count + ".txt", "a")
-                f = open("connected_model_" + str(epoch + 1) + ".txt", "a")
-                res = {}
-                res['translation'] = decoded_labels[0][0]
-                res['prediction'] = decoded_preds[0]
-                json.dump(res, f)
-                f.close()
-
             results = metric.compute()
+            print("validation reference:")
+            print(decoded_labels[0:20])
+            print("model predictions:")
+            print(decoded_preds[0:20])
             print(f"epoch {epoch + 1}, Validation BLEU score: {results['score']:.2f}")
 
 
             # Save and upload
             accelerator.wait_for_everyone()
             unwrapped_model = accelerator.unwrap_model(model)
-            output_dir = "finetuned_model/asr_translation_final/" + str(epoch + 1)
+            output_dir = "finetuned_model/" + str(epoch + 1)
             torch.save(model.state_dict(), output_dir)
-            # unwrapped_model.translation.save_pretrained(output_dir, save_function=accelerator.save)
-            # if accelerator.is_main_process:
-            #     tokenizer.save_pretrained(output_dir)

@@ -19,7 +19,7 @@ def speech_file_to_array_fn(batch):
     return batch
 
 # test_dataset = test_dataset.map(speech_file_to_array_fn)
-speech_array, sampling_rate = torchaudio.load('audio_train/4.wav')
+speech_array, sampling_rate = torchaudio.load('data_source/audio_train/4.wav')
 print(sampling_rate)
 resampler = torchaudio.transforms.Resample(sampling_rate, 16_000)
 speech = resampler(speech_array).squeeze().numpy()
