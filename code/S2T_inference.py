@@ -150,7 +150,7 @@ for name in tqdm(glob.glob('./MT_data/test/audio/*.wav')):
     )
 
     model.eval()
-    json_file_path = './evaluation-1214/ASR_MT_model_output/' + name.split('\\')[1].split('.')[0] + '_result.json'
+    json_file_path = './evaluation/ASR_MT_model_output/' + name.split('\\')[1].split('.')[0] + '_result.json'
     # Validation BLEU
     for batch in tqdm(eval_dataloader):
         with torch.no_grad():

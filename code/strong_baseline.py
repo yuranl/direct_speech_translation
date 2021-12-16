@@ -12,7 +12,7 @@ translation = pipeline("translation_chinese_to_english", model=model, tokenizer=
 import os, glob
 import codecs, json
 
-path = './'
+path = './data/test/'
 
 for input_filename in glob.glob(os.path.join(path, '*.json')):
   with codecs.open(input_filename, "r", "utf-8") as input:

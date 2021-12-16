@@ -10,7 +10,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./stone-airfoil-335221-d8728d7be62
 translate_client = translate.Client()
 r = sr.Recognizer()
 
-for name in glob.glob('./MT_data/test/audio/*.wav'):
+for name in glob.glob('./data/test/audio/*.wav'):
     json_name = './MT_data/test/' + name.split('\\')[1].split('.')[0] + '.json'
     # print(json_name)
     data = []
@@ -24,7 +24,7 @@ for name in glob.glob('./MT_data/test/audio/*.wav'):
     durations = [rec["duration"] for rec in data]
 
     speech = AudioSegment.from_wav(name)
-    json_file_path = './evaluation-1214/baseline_model_output/' + name.split('\\')[1].split('.')[0] + '_result.json'
+    json_file_path = './evaluation/baseline_model_output/' + name.split('\\')[1].split('.')[0] + '_result.json'
     print(json_file_path)
     translator = Translator()
 

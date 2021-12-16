@@ -85,7 +85,7 @@ for name in glob.glob('./MT_data/test/*.json'):
 
     # Validation BLEU
 
-    json_file_path = './evaluation-1214/MT_model_output/' + name.split('\\')[1].split('.')[0] + '_result.json'
+    json_file_path = './evaluation/MT_model_output/' + name.split('\\')[1].split('.')[0] + '_result.json'
     for batch in tqdm(eval_dataloader):
         with torch.no_grad():
             generated_tokens = accelerator.unwrap_model(model).generate(
