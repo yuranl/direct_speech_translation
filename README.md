@@ -1,5 +1,8 @@
 # direct_speech_translation
-Implements a direct Chinese-English end-to-end speech-to-speech machine translation model (CIS 530 term project)
+Implements a direct Chinese-English end-to-end differentiable speech-to-text machine translation model (CIS 530 term project).
+
+##
+Note: currently the speech-to-text model can't perform meaningful translations yet.
 
 ## Installation
 See requirements.txt for python modules used
